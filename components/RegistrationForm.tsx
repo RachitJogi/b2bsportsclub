@@ -74,11 +74,48 @@ export default function RegistrationForm() {
 
     setSubmitting(true);
 
-    // Simulate a network call
-    await new Promise((resolve) => setTimeout(resolve, 700));
+    // Prepare form data for submission
+    const formData = new FormData();
+    formData.append("fullName", values.fullName);
+    formData.append("dateOfBirth", values.dateOfBirth);
+    formData.append("whatsapp", values.whatsapp);
+    formData.append("instagram", values.instagram);
+    formData.append("cricherosProfile", values.cricherosProfile);
+    formData.append("playingRole", values.playingRole);
+    formData.append("playingStyle", values.playingStyle);
 
-    setSubmitting(false);
-    setSubmitted(true);
+    if (values.playerPhoto) {
+      formData.append("playerPhoto", values.playerPhoto);
+    }
+
+    if (values.paymentScreenshot) {
+      formData.append("paymentScreenshot", values.paymentScreenshot);
+    }
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbxJGF0YUjVXIrNVzRdwkWfSMGjbCINxDsbuIgg824XiuoL_W6UzwBSDS9RBfT_xP-j9/exec",
+        {
+          method: "POST",
+          body: JSON.stringify(Object.fromEntries(formData)),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const result = await response.json();
+      if (result.status === "success") {
+        setSubmitted(true);
+      } else {
+        alert("Failed to submit the form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred while submitting the form.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -245,6 +282,24 @@ export default function RegistrationForm() {
         </div>
 
         <div className='field'>
+          <p>
+            <strong>Player Registration Fee:</strong> ₹1500
+          </p>
+          <p>
+            <strong>UPI number:</strong> 8828287246
+          </p>
+          <p>
+            <strong>UPI ID:</strong> b2bsportsconnect@okhdfcbank
+          </p>
+          <Image
+            src={paymentQr}
+            alt='QR Code for Payment'
+            width={200}
+            height={300}
+          />
+        </div>
+
+        <div className='field'>
           <label htmlFor='paymentScreenshot'>
             Payment Screenshot <span className='req'>*</span>
           </label>
@@ -259,18 +314,6 @@ export default function RegistrationForm() {
             aria-invalid={Boolean(errors.paymentScreenshot)}
           />
           <span className='field-error'>{errors.paymentScreenshot}</span>
-        </div>
-
-        <div className='field field--full'>
-          <p>
-            <strong>Player Registration Fee:</strong> ₹1500
-          </p>
-          <Image
-            src={paymentQr}
-            alt='QR Code for Payment'
-            width={200}
-            height={300}
-          />
         </div>
 
         <div className='field field--full'>

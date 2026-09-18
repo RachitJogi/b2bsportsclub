@@ -11,6 +11,7 @@ import {
   Shield,
   PlayCircle,
   Camera,
+  Phone,
 } from "lucide-react";
 import RegistrationForm from "@/components/RegistrationForm";
 import logo from "@/public/logo.png";
@@ -79,6 +80,11 @@ const prizesAwards = [
     badge: "FIELDING",
     description: "Most catches & run outs.",
   },
+];
+
+const contacts = [
+  { name: "Vineet Doshi", phone: "+91 90049 44400", tel: "+919004944400" },
+  { name: "Vaibhav Bhatt", phone: "+91 88281 31806", tel: "+918828131806" },
 ];
 
 export default function Home() {
@@ -288,6 +294,26 @@ export default function Home() {
               <span className='eyebrow'>Your Path to Glory starts here.</span>
             </div>
             <RegistrationForm />
+
+            <div className='register__contact'>
+              <p className='register__contact-label'>
+                For any queries, please contact
+              </p>
+              <div className='register__contact-list'>
+                {contacts.map(({ name, phone, tel }) => (
+                  <a
+                    className='register__contact-item'
+                    href={`tel:${tel}`}
+                    key={name}
+                  >
+                    <Phone aria-hidden='true' />
+                    <span>
+                      <strong>{name}</strong> — {phone}
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </main>

@@ -904,6 +904,51 @@ img {
   margin-right: auto;
 }
 
+.register__contact {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.register__contact-label {
+  font-size: 1.2rem;
+  color: rgba(16, 22, 63, 0.56);
+  margin-bottom: 14px;
+}
+
+.register__contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 32px;
+}
+
+.register__contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--navy);
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.register__contact-item strong {
+  font-weight: 700;
+}
+
+.register__contact-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--red-mid);
+  flex-shrink: 0;
+}
+
+.register__contact-item:hover {
+  border-bottom-color: var(--red-mid);
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */
