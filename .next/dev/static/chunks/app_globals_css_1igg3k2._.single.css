@@ -857,6 +857,51 @@ img {
   margin-right: auto;
 }
 
+.register__contact {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.register__contact-label {
+  color: #10163f8f;
+  margin-bottom: 14px;
+  font-size: 1.2rem;
+}
+
+.register__contact-list {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 32px;
+  display: flex;
+}
+
+.register__contact-item {
+  color: var(--navy);
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+  border-bottom: 1px solid #0000;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 2px;
+  font-size: .95rem;
+  text-decoration: none;
+  display: inline-flex;
+}
+
+.register__contact-item strong {
+  font-weight: 700;
+}
+
+.register__contact-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--red-mid);
+  flex-shrink: 0;
+}
+
+.register__contact-item:hover {
+  border-bottom-color: var(--red-mid);
+}
+
 .footer {
   background: var(--ink);
   padding: 40px 0;

@@ -5,6 +5,52 @@ import Image from "next/image";
 import { CheckCircle2, Send } from "lucide-react";
 import paymentQr from "@/public/payment-qr.jpeg";
 
+const MAX_FILE_MB = 4;
+
+function fileToBase64(
+  file: File
+): Promise<{ name: string; type: string; data: string }> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve({ name: file.name, type: file.type, data: result.split(",")[1] });
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function compressImage(file: File, maxDim = 1600, quality = 0.8) {
+  try {
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, maxDim / Math.max(bitmap.width, bitmap.height));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(bitmap.width * scale);
+    canvas.height = Math.round(bitmap.height * scale);
+    canvas
+      .getContext("2d")!
+      .drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+    bitmap.close();
+
+    const blob = await new Promise<Blob>((resolve, reject) =>
+      canvas.toBlob(
+        (b) => (b ? resolve(b) : reject(new Error("toBlob failed"))),
+        "image/jpeg",
+        quality
+      )
+    );
+
+    const base = file.name.replace(/\.[^.]+$/, "") || "image";
+    return fileToBase64(
+      new File([blob], `${base}.jpg`, { type: "image/jpeg" })
+    );
+  } catch {
+    // Format the browser can't decode (e.g. HEIC on Chrome): send the original
+    return fileToBase64(file);
+  }
+}
+
 type FormState = {
   fullName: string;
   dateOfBirth: string;
@@ -50,8 +96,13 @@ function validate(values: FormState): FormErrors {
   if (!values.playingStyle.trim())
     errors.playingStyle = "Select your playing style.";
   if (!values.playerPhoto) errors.playerPhoto = "Upload a clear player photo.";
+  else if (values.playerPhoto.size > MAX_FILE_MB * 1024 * 1024)
+    errors.playerPhoto = `Photo must be under ${MAX_FILE_MB} MB.`;
+
   if (!values.paymentScreenshot)
     errors.paymentScreenshot = "Upload the payment screenshot.";
+  else if (values.paymentScreenshot.size > MAX_FILE_MB * 1024 * 1024)
+    errors.paymentScreenshot = `Screenshot must be under ${MAX_FILE_MB} MB.`;
 
   return errors;
 }
@@ -74,42 +125,45 @@ export default function RegistrationForm() {
 
     setSubmitting(true);
 
-    // Prepare form data for submission
-    const formData = new FormData();
-    formData.append("fullName", values.fullName);
-    formData.append("dateOfBirth", values.dateOfBirth);
-    formData.append("whatsapp", values.whatsapp);
-    formData.append("instagram", values.instagram);
-    formData.append("cricherosProfile", values.cricherosProfile);
-    formData.append("playingRole", values.playingRole);
-    formData.append("playingStyle", values.playingStyle);
-
-    if (values.playerPhoto) {
-      formData.append("playerPhoto", values.playerPhoto);
-    }
-
-    if (values.paymentScreenshot) {
-      formData.append("paymentScreenshot", values.paymentScreenshot);
-    }
-
     try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxJGF0YUjVXIrNVzRdwkWfSMGjbCINxDsbuIgg824XiuoL_W6UzwBSDS9RBfT_xP-j9/exec",
-        {
-          method: "POST",
-          body: JSON.stringify(Object.fromEntries(formData)),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const payload = {
+        fullName: values.fullName,
+        dateOfBirth: values.dateOfBirth,
+        whatsapp: values.whatsapp,
+        instagram: values.instagram,
+        cricherosProfile: values.cricherosProfile,
+        playingRole: values.playingRole,
+        playingStyle: values.playingStyle,
+        playerPhoto: await compressImage(values.playerPhoto!),
+        paymentScreenshot: await compressImage(values.paymentScreenshot!),
+      };
 
-      const result = await response.json();
+      console.log("Calling:", process.env.NEXT_PUBLIC_APPS_SCRIPT_URL);
+
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      // ---- replaced section starts here ----
+      const text = await response.text();
+      let result: { status?: string; message?: string };
+      try {
+        result = JSON.parse(text);
+      } catch {
+        console.error("Non-JSON response", response.status, text.slice(0, 300));
+        alert(`Server returned ${response.status}. Check the console.`);
+        return;
+      }
+
       if (result.status === "success") {
         setSubmitted(true);
       } else {
-        alert("Failed to submit the form. Please try again.");
+        console.error(result);
+        alert(result.message ?? "Failed to submit the form. Please try again.");
       }
+      // ---- replaced section ends here ----
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("An error occurred while submitting the form.");
