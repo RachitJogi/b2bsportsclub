@@ -195,7 +195,7 @@ export default function RegistrationForm() {
           <div className='sheet__success-mark'>
             <CheckCircle2 aria-hidden='true' />
           </div>
-          <h3>Player registered</h3>
+          <h3>Registration request submitted</h3>
           <p>
             Thank you, {values.fullName}! Your registration request is recieved.
             We will contact you via WhatsApp at {values.whatsapp} once the
