@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CheckCircle2, Send } from "lucide-react";
 import paymentQr from "@/public/payment-qr.jpeg";
 
-const MAX_FILE_MB = 4;
+const MAX_FILE_MB = 15;
 
 function fileToBase64(
   file: File
@@ -115,6 +115,22 @@ export default function RegistrationForm() {
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setValues((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function handleFileChange(
+    key: "playerPhoto" | "paymentScreenshot",
+    file: File | null
+  ) {
+    update(key, file);
+
+    if (file && file.size > MAX_FILE_MB * 1024 * 1024) {
+      setErrors((prev) => ({
+        ...prev,
+        [key]: `File must be under ${MAX_FILE_MB} MB.`,
+      }));
+    } else {
+      setErrors((prev) => ({ ...prev, [key]: undefined }));
+    }
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -329,9 +345,14 @@ export default function RegistrationForm() {
             name='playerPhoto'
             type='file'
             accept='image/*'
-            onChange={(e) => update("playerPhoto", e.target.files?.[0] || null)}
+            onChange={(e) =>
+              handleFileChange("playerPhoto", e.target.files?.[0] || null)
+            }
             aria-invalid={Boolean(errors.playerPhoto)}
           />
+          <span className='field-hint'>
+            Maximum file size: {MAX_FILE_MB}MB.
+          </span>
           <span className='field-error'>{errors.playerPhoto}</span>
         </div>
 
@@ -363,7 +384,7 @@ export default function RegistrationForm() {
             type='file'
             accept='image/*'
             onChange={(e) =>
-              update("paymentScreenshot", e.target.files?.[0] || null)
+              handleFileChange("paymentScreenshot", e.target.files?.[0] || null)
             }
             aria-invalid={Boolean(errors.paymentScreenshot)}
           />

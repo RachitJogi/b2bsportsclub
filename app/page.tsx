@@ -36,8 +36,6 @@ const prizesTop = [
     amount: "₹2,00,000",
     icon: Trophy,
     badge: "1ST PLACE",
-    kicker: "WINNER TAKES ALL",
-    description: "Grand trophy, gold medals, and championship bragging rights.",
     tier: "gold",
   },
   {
@@ -45,8 +43,6 @@ const prizesTop = [
     amount: "₹1,25,000",
     icon: Medal,
     badge: "2ND PLACE",
-    kicker: "FINALIST AWARD",
-    description: "Runner-up trophy and silver medals for the entire squad.",
     tier: "silver",
   },
 ];
@@ -57,28 +53,24 @@ const prizesAwards = [
     amount: "₹10,000",
     icon: Star,
     badge: "MVP",
-    description: "Overall tournament performance.",
   },
   {
     title: "Best Batsman",
     amount: "₹5,000",
     icon: Target,
     badge: "BATTING",
-    description: "Highest runs & strike rate.",
   },
   {
     title: "Best Bowler",
     amount: "₹5,000",
     icon: Zap,
     badge: "BOWLING",
-    description: "Most wickets & best economy.",
   },
   {
     title: "Best Fielder",
     amount: "₹5,000",
     icon: Shield,
     badge: "FIELDING",
-    description: "Most catches & run outs.",
   },
 ];
 
@@ -186,58 +178,43 @@ export default function Home() {
             </div>
 
             <div className='prize-grid prize-grid--top'>
-              {prizesTop.map(
-                ({
-                  title,
-                  amount,
-                  icon: Icon,
-                  badge,
-                  kicker,
-                  description,
-                  tier,
-                }) => (
-                  <div className={`prize-card prize-card--${tier}`} key={title}>
-                    <div className='prize-card__head'>
-                      <div className='prize-card__icon'>
-                        <Icon aria-hidden='true' />
-                      </div>
-                      <span
-                        className={`badge${
-                          tier === "gold" ? " badge--accent" : ""
-                        }`}
-                      >
-                        {badge}
-                      </span>
+              {prizesTop.map(({ title, amount, icon: Icon, badge, tier }) => (
+                <div className={`prize-card prize-card--${tier}`} key={title}>
+                  <div className='prize-card__head'>
+                    <div className='prize-card__icon'>
+                      <Icon aria-hidden='true' />
                     </div>
-                    <span className='prize-card__kicker'>{kicker}</span>
-                    <h3 className='prize-card__title'>{title}</h3>
-                    <div className='prize-card__amount gradient-text'>
-                      {amount}
-                    </div>
-                    <p className='prize-card__desc'>{description}</p>
+                    <span
+                      className={`badge${
+                        tier === "gold" ? " badge--accent" : ""
+                      }`}
+                    >
+                      {badge}
+                    </span>
                   </div>
-                )
-              )}
+                  <h3 className='prize-card__title'>{title}</h3>
+                  <div className='prize-card__amount gradient-text'>
+                    {amount}
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className='prize-grid prize-grid--awards'>
-              {prizesAwards.map(
-                ({ title, amount, icon: Icon, badge, description }) => (
-                  <div className='prize-card prize-card--award' key={title}>
-                    <div className='prize-card__head'>
-                      <div className='prize-card__icon'>
-                        <Icon aria-hidden='true' />
-                      </div>
-                      <span className='badge'>{badge}</span>
+              {prizesAwards.map(({ title, amount, icon: Icon, badge }) => (
+                <div className='prize-card prize-card--award' key={title}>
+                  <div className='prize-card__head'>
+                    <div className='prize-card__icon'>
+                      <Icon aria-hidden='true' />
                     </div>
-                    <h3 className='prize-card__title'>{title}</h3>
-                    <div className='prize-card__amount gradient-text'>
-                      {amount}
-                    </div>
-                    <p className='prize-card__desc'>{description}</p>
+                    <span className='badge'>{badge}</span>
                   </div>
-                )
-              )}
+                  <h3 className='prize-card__title'>{title}</h3>
+                  <div className='prize-card__amount gradient-text'>
+                    {amount}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
