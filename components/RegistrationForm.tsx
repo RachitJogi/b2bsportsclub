@@ -197,8 +197,9 @@ export default function RegistrationForm() {
           </div>
           <h3>Player registered</h3>
           <p>
-            Thank you, {values.fullName}! Your registration is complete. We will
-            contact you via WhatsApp at {values.whatsapp}.
+            Thank you, {values.fullName}! Your registration request is recieved.
+            We will contact you via WhatsApp at {values.whatsapp} once the
+            payment is verified.
           </p>
         </div>
       </div>
