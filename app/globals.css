@@ -833,6 +833,7 @@ img {
   border-radius: var(--radius-s);
   padding: 12px 14px;
   transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  width: 100%;
 }
 
 .field textarea {
