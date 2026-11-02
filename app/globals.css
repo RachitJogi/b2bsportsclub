@@ -1,31 +1,31 @@
 /* ============================================================
    B2B SPORTS CLUB — design tokens
-   Palette pulled directly from the club crest gradient.
+   Acid Yellow & Ink — yellow → amber → orange brand gradient on near-black.
    ============================================================ */
 :root {
-  --font-display: "Anton";
-  --font-body: "Barlow";
+  --font-display: "Exo";
+  --font-body: "Exo";
 
-  --ink: #0a0d22;
-  --ink-raised: #12172f;
-  --ink-line: rgba(247, 245, 240, 0.14);
-  --ink-line-soft: rgba(247, 245, 240, 0.07);
+  --ink: #0a0a0a;
+  --ink-raised: #171717;
+  --ink-line: rgba(255, 255, 255, 0.14);
+  --ink-line-soft: rgba(255, 255, 255, 0.07);
 
-  --paper: #fdfcf9;
-  --paper-line: rgba(16, 22, 63, 0.1);
-  --paper-line-soft: rgba(16, 22, 63, 0.06);
+  --paper: #fffdf0;
+  --paper-line: rgba(10, 10, 10, 0.1);
+  --paper-line-soft: rgba(10, 10, 10, 0.06);
 
-  --navy: #10163f;
-  --white: #f7f5f0;
-  --white-dim: rgba(247, 245, 240, 0.68);
-  --white-faint: rgba(247, 245, 240, 0.44);
+  --navy: #0a0a0a;
+  --white: #ffffff;
+  --white-dim: rgba(255, 255, 255, 0.68);
+  --white-faint: rgba(255, 255, 255, 0.44);
 
-  --red-bright: #ed3130;
-  --red-mid: #c81f3d;
-  --plum: #3c0d33;
+  --red-bright: #ffe600; /* acid yellow */
+  --red-mid: #ffb800; /* amber */
+  --plum: #ff7a00; /* signal orange */
 
   --gradient-brand: linear-gradient(115deg, var(--red-bright) 0%, var(--red-mid) 48%, var(--plum) 100%);
-  --gradient-brand-soft: linear-gradient(115deg, rgba(237, 49, 48, 0.16), rgba(60, 13, 51, 0.16));
+  --gradient-brand-soft: linear-gradient(115deg, rgba(255, 230, 0, 0.16), rgba(255, 122, 0, 0.16));
 
   --radius-s: 4px;
   --radius-m: 10px;
@@ -71,10 +71,10 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display), sans-serif;
-  font-weight: 400;
-  line-height: 0.98;
+  font-weight: 800;
+  line-height: 1.02;
   margin: 0;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.005em;
 }
 
 p {
@@ -195,7 +195,7 @@ img {
   height: 7px;
   border-radius: 50%;
   background: var(--red-bright);
-  box-shadow: 0 0 0 3px rgba(237, 49, 48, 0.22);
+  box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.28);
 }
 
 /* ============================================================
@@ -215,7 +215,7 @@ img {
   width: 900px;
   height: 900px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(200, 31, 61, 0.28) 0%, rgba(60, 13, 51, 0.12) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 230, 0, 0.2) 0%, rgba(255, 122, 0, 0.1) 45%, transparent 70%);
   pointer-events: none;
 }
 
@@ -325,13 +325,13 @@ img {
 
 .btn--primary {
   background: var(--gradient-brand);
-  color: var(--white);
-  box-shadow: 0 10px 30px -12px rgba(200, 31, 61, 0.55);
+  color: var(--ink);
+  box-shadow: 0 10px 30px -12px rgba(255, 230, 0, 0.35);
 }
 
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 34px -10px rgba(200, 31, 61, 0.65);
+  box-shadow: 0 14px 34px -10px rgba(255, 230, 0, 0.45);
 }
 
 .btn--ghost {
@@ -549,7 +549,7 @@ img {
   border: 1px solid transparent;
   border-image: var(--gradient-brand) 1;
   background:
-    radial-gradient(circle at 20% 15%, rgba(237, 49, 48, 0.18), transparent 55%),
+    radial-gradient(circle at 20% 15%, rgba(255, 230, 0, 0.16), transparent 55%),
     var(--ink-raised);
 }
 
@@ -628,7 +628,7 @@ img {
 
 .badge--accent {
   color: var(--red-bright);
-  border-color: rgba(237, 49, 48, 0.35);
+  border-color: rgba(255, 230, 0, 0.4);
 }
 
 /* award (small) cards */
@@ -846,7 +846,7 @@ img {
 .field textarea:focus {
   outline: none;
   border-color: var(--red-mid);
-  box-shadow: 0 0 0 3px rgba(200, 31, 61, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.2);
 }
 
 .field-error {
