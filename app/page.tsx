@@ -1,311 +1,157 @@
 import Image from "next/image";
+import Link from "next/link";
+import CtaBanner from "@/components/ui/CtaBanner";
+import EventCard from "@/components/ui/EventCard";
+import FactStrip from "@/components/ui/FactStrip";
+import Icon from "@/components/ui/Icon";
+import PrizeCard from "@/components/ui/PrizeCard";
+import SectionHeading from "@/components/ui/SectionHeading";
+import TournamentCard from "@/components/ui/TournamentCard";
 import {
-  Calendar,
-  MapPin,
-  Users,
-  Star,
-  Trophy,
-  Medal,
-  Target,
-  Zap,
-  Shield,
-  PlayCircle,
-  Camera,
-  Phone,
-} from "lucide-react";
-import RegistrationForm from "@/components/RegistrationForm";
+  getFeaturedTournament,
+  getHomeContent,
+  getTournaments,
+  getUpcomingEvents,
+} from "@/lib/content";
+import { pageMetadata } from "@/lib/site";
 import logo from "@/public/logo.png";
-import logoMark from "@/public/logo-mark.png";
 
-const scoreboard = [
-  { label: "Tournament date", value: "28 Nov 2026", icon: Calendar },
-  { label: "Venue", value: "Seven Eleven Turf, Mira Road", icon: MapPin },
-  { label: "Teams", value: "10 teams", icon: Users },
-  { label: "Icon player", value: "1 per team", icon: Star },
-];
+export const revalidate = 3600;
 
-const auctionSteps = [
-  "The squads will be built.",
-  "The strategies will unfold.",
-  "The bids will rise.",
-];
+export const metadata = pageMetadata({
+  title: "B2B Sports Club — Cricket tournaments, auctions & events",
+  description:
+    "Register your team for Path to Glory, B2B Sports Club's flagship cricket tournament with live auctions, icon players and a ₹3,50,000 prize pool.",
+  path: "/",
+});
 
-const prizesTop = [
-  {
-    title: "Champions",
-    amount: "₹2,00,000",
-    icon: Trophy,
-    badge: "1ST PLACE",
-    tier: "gold",
-  },
-  {
-    title: "Runners-up",
-    amount: "₹1,25,000",
-    icon: Medal,
-    badge: "2ND PLACE",
-    tier: "silver",
-  },
-];
+export default async function HomePage() {
+  const [home, featured, tournaments, events] = await Promise.all([
+    getHomeContent(),
+    getFeaturedTournament(),
+    getTournaments(),
+    getUpcomingEvents(),
+  ]);
 
-const prizesAwards = [
-  {
-    title: "MVP",
-    amount: "₹10,000",
-    icon: Star,
-    badge: "MVP",
-  },
-  {
-    title: "Best Batsman",
-    amount: "₹5,000",
-    icon: Target,
-    badge: "BATTING",
-  },
-  {
-    title: "Best Bowler",
-    amount: "₹5,000",
-    icon: Zap,
-    badge: "BOWLING",
-  },
-  {
-    title: "Best Fielder",
-    amount: "₹5,000",
-    icon: Shield,
-    badge: "FIELDING",
-  },
-];
-
-const contacts = [
-  { name: "Vineet Doshi", phone: "+91 90049 44400", tel: "+919004944400" },
-  { name: "Vaibhav Bhatt", phone: "+91 88281 31806", tel: "+918828131806" },
-];
-
-export default function Home() {
   return (
     <>
-      <header className='topbar'>
-        <div className='topbar__inner'>
-          <div className='topbar__brand'>
-            <Image src={logoMark} alt='' height={32} width={46} />
-            B2B SPORTS CLUB
-          </div>
-          <div className='topbar__status'>
-            <span className='topbar__dot' aria-hidden='true' />
-            REGISTRATIONS OPEN
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero__glow" aria-hidden="true" />
+        <div className="container hero__inner">
+          <Image src={logo} alt="B2B Sports Club crest" className="hero__crest" priority />
+          <span className="hero__chapter">{home.heroEyebrow.toUpperCase()}</span>
+          <h1 id="hero-title">
+            {home.heroTitle}
+            <br />
+            <span className="gradient-text">{home.heroHighlight}</span>
+          </h1>
+          <p className="hero__body">{home.heroBody}</p>
+          <div className="hero__actions">
+            <Link className="btn btn--primary" href="/register">
+              Register now
+            </Link>
+            <Link className="btn btn--ghost" href="/tournaments">
+              Explore tournaments
+            </Link>
           </div>
         </div>
-      </header>
+      </section>
 
-      <main>
-        {/* ---------------- HERO ---------------- */}
-        <section className='hero'>
-          <div className='hero__glow' aria-hidden='true' />
-          <div className='container hero__inner'>
-            <Image
-              src={logo}
-              alt='B2B Sports Club'
-              className='hero__crest'
-              priority
+      {featured && <FactStrip facts={featured.facts} />}
+
+      <section className="section" aria-labelledby="features-title">
+        <div className="container">
+          <SectionHeading
+            id="features-title"
+            title="WHY PLAY WITH B2B"
+            kicker="A tournament experience, not just a match."
+          />
+          <ul className="grid grid--4 list-reset">
+            {home.features.map((f) => (
+              <li className="feature" key={f.title}>
+                <div className="broadcast__icon">
+                  <Icon name={f.icon} />
+                </div>
+                <h3>{f.title}</h3>
+                <p>{f.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section" aria-labelledby="steps-title">
+        <div className="container">
+          <SectionHeading id="steps-title" title="HOW IT WORKS" kicker="Three steps to the turf." />
+          <ol className="grid grid--3 list-reset">
+            {home.steps.map((s, i) => (
+              <li className="step" key={s.title}>
+                <span className="step__index">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{s.title}</h3>
+                <p>{s.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {featured && (
+        <section className="section" aria-labelledby="prizes-title">
+          <div className="container">
+            <SectionHeading
+              id="prizes-title"
+              title="THE GLORY HAS A PRICE"
+              kicker={`What's on the table at ${featured.name}.`}
             />
-            <h1>
-              PATH TO GLORY
-              <br />
-              <span className='gradient-text'>CHAPTER 2</span>
-            </h1>
-            <span className='hero__chapter'>
-              NEW CHAPTER. <b>SAME BROTHERHOOD.</b>
-            </span>
-            <p className='hero__tagline'>
-              The rivalry gets bigger. The stakes get higher.
-            </p>
-            <p className='hero__body'>
-              Step onto the turf, represent your team, battle through every
-              over, and chase the ultimate glory — ten teams, one icon player
-              each, and a single destination.
-            </p>
-            <div className='hero__actions'>
-              <a className='btn btn--primary' href='#register'>
-                Register now
-              </a>
-              <a className='btn btn--ghost' href='#prizes'>
-                Prize money
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- SCOREBOARD STRIP ---------------- */}
-        <section className='scoreboard'>
-          <div className='container'>
-            <div className='scoreboard__grid'>
-              {scoreboard.map(({ label, value, icon: Icon }) => (
-                <div className='scoreboard__cell' key={label}>
-                  <div className='scoreboard__label'>
-                    <Icon aria-hidden='true' />
-                    {label.toUpperCase()}
-                  </div>
-                  <div className='scoreboard__value'>{value}</div>
-                </div>
+            <div className="grid grid--3 list-reset">
+              {featured.prizes.slice(0, 3).map((p) => (
+                <PrizeCard prize={p} key={p.title} />
               ))}
             </div>
-          </div>
-        </section>
-
-        {/* ---------------- AUCTION ---------------- */}
-        <section className='section' id='auction'>
-          <div className='container auction'>
-            <div>
-              <h2 className='section-heading'>THE AUCTION</h2>
-              <div className='section-kicker'>
-                <span className='eyebrow'>
-                  Build your army before you take the field.
-                </span>
-              </div>
-            </div>
-
-            <div className='ticket'>
-              <div className='ticket__label'>AUCTION DAY</div>
-              <div className='ticket__date'>23 OCT 2026</div>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- PRIZE LEDGER ---------------- */}
-        <section className='section' id='prizes'>
-          <div className='container'>
-            <h2 className='section-heading'>THE GLORY HAS A PRICE</h2>
-            <div className='section-kicker'>
-              <span className='eyebrow'>What&apos;s on the table.</span>
-            </div>
-
-            <div className='prize-grid prize-grid--top'>
-              {prizesTop.map(({ title, amount, icon: Icon, badge, tier }) => (
-                <div className={`prize-card prize-card--${tier}`} key={title}>
-                  <div className='prize-card__head'>
-                    <div className='prize-card__icon'>
-                      <Icon aria-hidden='true' />
-                    </div>
-                    <span
-                      className={`badge${
-                        tier === "gold" ? " badge--accent" : ""
-                      }`}
-                    >
-                      {badge}
-                    </span>
-                  </div>
-                  <h3 className='prize-card__title'>{title}</h3>
-                  <div className='prize-card__amount gradient-text'>
-                    {amount}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className='prize-grid prize-grid--awards'>
-              {prizesAwards.map(({ title, amount, icon: Icon, badge }) => (
-                <div className='prize-card prize-card--award' key={title}>
-                  <div className='prize-card__head'>
-                    <div className='prize-card__icon'>
-                      <Icon aria-hidden='true' />
-                    </div>
-                    <span className='badge'>{badge}</span>
-                  </div>
-                  <h3 className='prize-card__title'>{title}</h3>
-                  <div className='prize-card__amount gradient-text'>
-                    {amount}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- BROADCAST ---------------- */}
-        <section className='section'>
-          <div className='container'>
-            <h2 className='section-heading'>EXPERIENCE THE ACTION</h2>
-            <div className='section-kicker'>
-              <span className='eyebrow'>Play it. Capture it. Share it.</span>
-            </div>
-
-            <div className='broadcast' style={{ marginTop: 36 }}>
-              <div className='broadcast__card'>
-                <div className='broadcast__icon'>
-                  <PlayCircle aria-hidden='true' />
-                </div>
-                <h3>Live broadcast - YouTube</h3>
-              </div>
-              <div className='broadcast__card'>
-                <div className='broadcast__icon'>
-                  <Camera aria-hidden='true' />
-                </div>
-                <h3>Social media coverage - Instagram</h3>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- CLOSING STATEMENT ---------------- */}
-        <section className='statement'>
-          <div className='container'>
-            <span className='eyebrow'>
-              ONE TOURNAMENT. TEN TEAMS. ONE DESTINATION.
-            </span>
-            <h2 style={{ marginTop: 16 }}>
-              This isn&apos;t just about winning matches.
-            </h2>
-            <p>
-              It&apos;s about the moments, the rivalries, the brotherhood and
-              the memories that stay long after the final ball.
-            </p>
-            <p className='statement__brotherhood'>
-              Are you ready to write your chapter?
+            <p className="section-more">
+              <Link className="text-link" href={`/tournaments/${featured.slug}`}>
+                See all prizes →
+              </Link>
             </p>
           </div>
         </section>
+      )}
 
-        {/* ---------------- REGISTRATION ---------------- */}
-        <section className='register' id='register'>
-          <div className='container'>
-            <div className='register__head'>
-              <h2>REGISTER NOW</h2>
-              <span className='eyebrow'>Your Path to Glory starts here.</span>
-            </div>
-            <RegistrationForm />
-
-            <div className='register__contact'>
-              <p className='register__contact-label'>
-                For any queries, please contact
-              </p>
-              <div className='register__contact-list'>
-                {contacts.map(({ name, phone, tel }) => (
-                  <a
-                    className='register__contact-item'
-                    href={`tel:${tel}`}
-                    key={name}
-                  >
-                    <Phone aria-hidden='true' />
-                    <span>
-                      <strong>{name}</strong> — {phone}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
+      <section className="section" aria-labelledby="tournaments-title">
+        <div className="container">
+          <SectionHeading id="tournaments-title" title="TOURNAMENTS" kicker="Past and present chapters." />
+          <div className="grid grid--2">
+            {tournaments.slice(0, 2).map((t) => (
+              <TournamentCard tournament={t} key={t.slug} />
+            ))}
           </div>
-        </section>
-      </main>
-
-      <footer className='footer'>
-        <div className='container footer__inner'>
-          <div className='footer__brand'>
-            <Image src={logoMark} alt='' height={28} width={41} />
-            <span>B2B SPORTS CLUB</span>
-          </div>
-          <div className='footer__meta'>
-            Path to Glory · Chapter 2 · 28 Nov 2026
-          </div>
+          <p className="section-more">
+            <Link className="text-link" href="/tournaments">
+              All tournaments →
+            </Link>
+          </p>
         </div>
-      </footer>
+      </section>
+
+      {events.length > 0 && (
+        <section className="section" aria-labelledby="events-title">
+          <div className="container">
+            <SectionHeading id="events-title" title="UPCOMING EVENTS" kicker="Mark your calendar." />
+            <div className="stack">
+              {events.slice(0, 3).map((e) => (
+                <EventCard event={e} key={e.slug} />
+              ))}
+            </div>
+            <p className="section-more">
+              <Link className="text-link" href="/events">
+                All events →
+              </Link>
+            </p>
+          </div>
+        </section>
+      )}
+
+      <CtaBanner title={home.ctaTitle} body={home.ctaBody} />
     </>
   );
 }

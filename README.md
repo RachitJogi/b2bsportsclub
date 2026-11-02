@@ -22,17 +22,19 @@ npm start
 
 ## What's inside
 
-- `app/page.tsx` — all the tournament content (hero, scoreboard strip, the
-  auction, prize ledger, broadcast section, closing statement) plus the
-  registration section.
-- `components/RegistrationForm.tsx` — the client-side registration form
-  (team name, captain, phone, email, home ground, squad size, notes) with
-  validation and a success state.
-- `app/globals.css` — the full design system (colors, type, layout).
-- `public/logo.png` — the club crest, extracted from the supplied PDF with a
-  transparent background.
-- Fonts (Anton for display, Barlow for body) are self-hosted via
-  `@fontsource`, so there's no runtime dependency on Google Fonts.
+- `app/` — routes: `/` (home), `/about`, `/contact`, `/register`,
+  `/tournaments`, `/tournaments/[slug]`, `/events`, plus `sitemap.xml` and
+  `robots.txt`. Each page exports its own SEO metadata.
+- `lib/content/` — the single data layer: typed models (`types.ts`), static
+  content (`data.ts`) and async fetchers (`index.ts`). Pages only call the
+  fetchers, so Contentful can be swapped in by re-implementing `index.ts`.
+- `components/layout/` — header (responsive nav) and footer.
+- `components/ui/` — reusable cards, hero, headings, fact strip.
+- `components/RegistrationForm.tsx` — the registration form (client component).
+- `app/globals.css` + `app/site.css` — design tokens and styles.
+
+Scripts: `npm run dev`, `npm run build`, `npm run lint`, `npm run typecheck`.
+Set `NEXT_PUBLIC_SITE_URL` in production for canonical URLs and the sitemap.
 
 ## Wiring up real submissions
 
