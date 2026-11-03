@@ -49,8 +49,8 @@
 
 .hero-art__vignette {
   background:
-    radial-gradient(ellipse at 50% 45%, rgba(10, 10, 10, 0.1) 0%, rgba(10, 10, 10, 0.72) 80%),
-    linear-gradient(to bottom, rgba(10, 10, 10, 0.25), rgba(10, 10, 10, 0.1) 40%, var(--ink) 100%);
+    radial-gradient(ellipse at 50% 45%, rgba(11, 19, 43, 0.1) 0%, rgba(11, 19, 43, 0.72) 80%),
+    linear-gradient(to bottom, rgba(11, 19, 43, 0.25), rgba(11, 19, 43, 0.1) 40%, var(--ink) 100%);
 }
 
 .hero-full__inner {
@@ -67,7 +67,7 @@
   width: clamp(84px, 11vw, 124px);
   height: auto;
   margin-bottom: 20px;
-  filter: drop-shadow(0 8px 28px rgba(255, 184, 0, 0.45));
+  filter: drop-shadow(0 8px 28px rgba(0, 229, 255, 0.45));
   opacity: 0;
   animation: rise 0.8s var(--ease) forwards;
 }
@@ -80,7 +80,7 @@
   padding: 7px 18px;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 999px;
-  background: rgba(10, 10, 10, 0.4);
+  background: rgba(11, 19, 43, 0.4);
   backdrop-filter: blur(6px);
   opacity: 0;
   animation: rise 0.8s var(--ease) 0.1s forwards;
@@ -136,7 +136,7 @@
   height: 8px;
   margin-left: -2px;
   border-radius: 2px;
-  background: var(--red-bright);
+  background: var(--cyan);
   animation: cue 1.8s ease-in-out infinite;
 }
 
@@ -165,7 +165,7 @@
   height: 520px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(255, 184, 0, 0.16), transparent 68%);
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.16), transparent 68%);
 }
 
 .hs__bg--a { top: -120px; right: -140px; }
@@ -183,7 +183,7 @@
 .hs__subtitle {
   margin: clamp(48px, 7vw, 80px) 0 28px;
   font-size: clamp(1.25rem, 2.4vw, 1.7rem);
-  color: var(--red-bright);
+  color: var(--cyan);
   letter-spacing: 0.01em;
 }
 
@@ -215,7 +215,7 @@
 .hs__pull {
   margin-top: clamp(40px, 6vw, 72px);
   padding-left: 22px;
-  border-left: 4px solid var(--red-mid);
+  border-left: 4px solid var(--cyan-mid);
   font-size: clamp(1.2rem, 2.4vw, 1.75rem);
   font-weight: 700;
   line-height: 1.35;
@@ -261,7 +261,7 @@
 
 .refrain__n {
   font-size: 0.85rem;
-  color: var(--red-bright);
+  color: var(--cyan);
   letter-spacing: 0.14em;
 }
 
@@ -322,7 +322,7 @@
 
 .point:hover {
   transform: translateY(-6px);
-  border-color: var(--red-mid);
+  border-color: var(--cyan-mid);
 }
 
 .point__n {
@@ -366,7 +366,7 @@
 /* ---------- 4. JOURNEY ---------- */
 .hs--journey {
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(255, 184, 0, 0.12), transparent 60%),
+    radial-gradient(ellipse at 50% 0%, rgba(0, 229, 255, 0.12), transparent 60%),
     var(--ink);
 }
 
@@ -395,7 +395,7 @@
   padding: 36px 26px 30px;
   border: 1px solid var(--ink-line);
   border-radius: 18px;
-  background: linear-gradient(160deg, rgba(255, 230, 0, 0.1), rgba(255, 255, 255, 0.02) 55%);
+  background: linear-gradient(160deg, rgba(0, 229, 255, 0.1), rgba(255, 255, 255, 0.02) 55%);
   backdrop-filter: blur(4px);
   overflow: hidden;
   transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
@@ -403,7 +403,7 @@
 
 .trophy:hover {
   transform: translateY(-8px);
-  border-color: var(--red-mid);
+  border-color: var(--cyan-mid);
 }
 
 .trophy::after {
@@ -413,7 +413,7 @@
   width: 220px;
   height: 220px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 122, 0, 0.22), transparent 70%);
+  background: radial-gradient(circle, rgba(0, 184, 212, 0.22), transparent 70%);
   pointer-events: none;
 }
 
@@ -435,9 +435,9 @@
   height: 64px;
   margin-bottom: 22px;
   border-radius: 50%;
-  background: var(--gradient-brand);
+  background: var(--gold);
   color: var(--ink);
-  box-shadow: 0 12px 30px -10px rgba(255, 184, 0, 0.6);
+  box-shadow: 0 12px 30px -10px rgba(255, 215, 0, 0.55);
 }
 
 .trophy__icon svg {
@@ -451,7 +451,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--red-mid);
+  color: var(--cyan-mid);
 }
 
 .trophy h3 {
@@ -490,7 +490,7 @@
 /* ---------- 5. COMING SOON ---------- */
 .hs--poster {
   background:
-    linear-gradient(180deg, var(--ink) 0%, #14100a 100%);
+    linear-gradient(180deg, var(--ink) 0%, #0e1838 100%);
 }
 
 .poster__glow {
@@ -501,7 +501,7 @@
   width: 1100px;
   height: 1100px;
   margin-left: -550px;
-  background: radial-gradient(circle, rgba(255, 230, 0, 0.14), rgba(255, 122, 0, 0.07) 40%, transparent 68%);
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.14), rgba(0, 184, 212, 0.07) 40%, transparent 68%);
   pointer-events: none;
 }
 
@@ -549,7 +549,7 @@
 }
 
 .highlight__icon {
-  color: var(--red-bright);
+  color: var(--cyan);
   margin-bottom: 4px;
 }
 
@@ -631,7 +631,7 @@
 .chips svg {
   width: 16px;
   height: 16px;
-  color: var(--red-bright);
+  color: var(--cyan);
 }
 
 .mission {
@@ -640,7 +640,7 @@
   border-radius: 18px;
   background: var(--gradient-brand);
   color: var(--ink);
-  box-shadow: 0 30px 80px -30px rgba(255, 184, 0, 0.45);
+  box-shadow: 0 30px 80px -30px rgba(0, 229, 255, 0.45);
 }
 
 .mission__label {
@@ -675,8 +675,8 @@
   height: 760px;
   margin: -380px 0 0 -380px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 184, 0, 0.25);
-  box-shadow: 0 0 0 80px rgba(255, 184, 0, 0.03), 0 0 0 160px rgba(255, 184, 0, 0.02);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 0 80px rgba(0, 229, 255, 0.03), 0 0 0 160px rgba(0, 229, 255, 0.02);
 }
 
 .finale__inner {
@@ -708,7 +708,7 @@
   margin-top: 18px;
   font-weight: 700;
   letter-spacing: 0.04em;
-  color: var(--red-bright);
+  color: var(--cyan);
 }
 
 /* ---------- Responsive ---------- */
