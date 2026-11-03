@@ -123,3 +123,58 @@ export interface AboutContent {
   values: Feature[];
   stats: { label: string; value: string }[];
 }
+
+/** Home page storytelling content (hero + six sections). */
+export interface HomeStory {
+  hero: {
+    brand: string;
+    title: string;
+    highlight: string;
+    tagline: string;
+  };
+  welcome: {
+    paragraphs: string[];
+    refrain: string[];
+    closing: string;
+    banner: string;
+  };
+  brotherhood: {
+    title: string;
+    paragraphs: string[];
+    pointsTitle: string;
+    points: Feature[];
+    closing: string;
+  };
+  journey: {
+    title: string;
+    intro: string;
+    paragraphs: string[];
+    milestones: { label: string; title: string; description: string; icon: IconName }[];
+    closing: string[];
+  };
+  comingSoon: {
+    title: string;
+    subtitle: string;
+    tagline: string;
+    paragraphs: string[];
+    highlightsTitle: string;
+    highlights: Fact[];
+    closingTitle: string;
+    closing: string;
+    tournamentSlug: string;
+  };
+  why: {
+    title: string;
+    subtitle: string;
+    paragraphs: string[];
+    missionLabel: string;
+    mission: string;
+    elements: Feature[];
+  };
+  final: {
+    title: string;
+    paragraphs: string[];
+    actions: string;
+    signoff: string;
+  };
+}

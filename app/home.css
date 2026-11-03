@@ -1,0 +1,880 @@
+/* ============================================================
+   HOME PAGE — full-bleed hero, story sections, scroll effects
+   Scroll-driven animations are pure CSS (animation-timeline) and only
+   switch on when supported and the user has not asked for reduced motion.
+   Without them every element simply renders in its final position.
+   ============================================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- 1. HERO ---------- */
+.hero-full {
+  position: relative;
+  min-height: calc(100svh - 72px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.hero-art,
+.hero-art__layer,
+.hero-art__vignette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-art {
+  z-index: -1;
+}
+
+/* layers are oversized vertically so parallax travel never reveals gaps */
+.hero-art__layer {
+  inset: -8% 0 0;
+  height: 108%;
+}
+
+.hero-art__vignette {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(10, 10, 10, 0.1) 0%, rgba(10, 10, 10, 0.72) 80%),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.25), rgba(10, 10, 10, 0.1) 40%, var(--ink) 100%);
+}
+
+.hero-full__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 56px;
+  padding-bottom: 96px;
+}
+
+.hero-full__crest {
+  width: clamp(84px, 11vw, 124px);
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 8px 28px rgba(255, 184, 0, 0.45));
+  opacity: 0;
+  animation: rise 0.8s var(--ease) forwards;
+}
+
+.hero-full__brand {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: var(--white);
+  padding: 7px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  animation: rise 0.8s var(--ease) 0.1s forwards;
+}
+
+.hero-full h1 {
+  margin-top: 24px;
+  font-size: clamp(2.3rem, 6.6vw, 5.2rem);
+  max-width: 17ch;
+  text-wrap: balance;
+  filter: drop-shadow(0 4px 24px rgba(0, 0, 0, 0.55));
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.2s forwards;
+}
+
+.hero-full__tagline {
+  margin-top: 22px;
+  max-width: 44ch;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-weight: 500;
+  color: var(--white);
+  text-wrap: balance;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.32s forwards;
+}
+
+.hero-full__actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.44s forwards;
+}
+
+.hero-full__cue {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  width: 24px;
+  height: 40px;
+  margin-left: -12px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 14px;
+}
+
+.hero-full__cue i {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--red-bright);
+  animation: cue 1.8s ease-in-out infinite;
+}
+
+@keyframes cue {
+  0% { transform: translateY(0); opacity: 1; }
+  80%, 100% { transform: translateY(14px); opacity: 0; }
+}
+
+/* ---------- shared section primitives ---------- */
+.hs {
+  position: relative;
+  padding: clamp(72px, 11vw, 140px) 0;
+  overflow: hidden;
+  isolation: isolate;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.hs--raised {
+  background: var(--ink-raised);
+}
+
+.hs__bg {
+  position: absolute;
+  z-index: -1;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 184, 0, 0.16), transparent 68%);
+}
+
+.hs__bg--a { top: -120px; right: -140px; }
+.hs__bg--b { bottom: -160px; left: -160px; }
+
+.hs__title {
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  text-wrap: balance;
+}
+
+.hs__title--xl {
+  font-size: clamp(2.3rem, 6vw, 4.8rem);
+}
+
+.hs__subtitle {
+  margin: clamp(48px, 7vw, 80px) 0 28px;
+  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  color: var(--red-bright);
+  letter-spacing: 0.01em;
+}
+
+.hs__text {
+  color: var(--white-dim);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.75;
+}
+
+.hs__head {
+  max-width: 880px;
+}
+
+.hs__head .hs__title {
+  margin-bottom: 28px;
+}
+
+.hs__cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 48px;
+  margin-top: 8px;
+}
+
+.hs__head .hs__cols {
+  grid-template-columns: 1fr;
+}
+
+.hs__pull {
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-left: 22px;
+  border-left: 4px solid var(--red-mid);
+  font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.35;
+  max-width: 34ch;
+}
+
+/* ---------- 2. WELCOME ---------- */
+.hs--welcome {
+  padding-bottom: 0;
+}
+
+.welcome {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.welcome__lead {
+  font-size: clamp(1.4rem, 2.7vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  text-wrap: pretty;
+}
+
+.welcome__refrain {
+  display: grid;
+  gap: 14px;
+}
+
+.refrain {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-m);
+  background: var(--gradient-brand-soft);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+}
+
+.refrain__n {
+  font-size: 0.85rem;
+  color: var(--red-bright);
+  letter-spacing: 0.14em;
+}
+
+.welcome__closing {
+  margin: clamp(40px, 6vw, 72px) auto clamp(56px, 8vw, 96px);
+  max-width: 40ch;
+  text-align: center;
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-weight: 600;
+  text-wrap: balance;
+}
+
+.ticker {
+  overflow: hidden;
+  background: var(--gradient-brand);
+  color: var(--ink);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  transform: rotate(-1.2deg) scale(1.03);
+  margin-bottom: -6px;
+}
+
+.ticker__track {
+  display: flex;
+  gap: 40px;
+  width: max-content;
+  padding: 16px 0;
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+.ticker__track span {
+  display: inline-flex;
+  gap: 40px;
+}
+
+.ticker__track b {
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+
+/* ---------- 3. BROTHERHOOD ---------- */
+.points {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+
+.point {
+  position: relative;
+  padding: 26px 20px 24px;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-m);
+  background: var(--ink);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.point:hover {
+  transform: translateY(-6px);
+  border-color: var(--red-mid);
+}
+
+.point__n {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white-faint);
+}
+
+.point__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: var(--gradient-brand);
+  color: var(--ink);
+}
+
+.point__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.point h4 {
+  font-size: 1.08rem;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.point p {
+  font-size: 0.92rem;
+  color: var(--white-dim);
+  line-height: 1.6;
+}
+
+/* ---------- 4. JOURNEY ---------- */
+.journey {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.journey__side > div {
+  position: sticky;
+  top: 120px;
+}
+
+.journey__intro {
+  margin-top: 22px;
+  font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+  font-weight: 500;
+  color: var(--white-dim);
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  margin-bottom: 36px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 27px;
+  top: 10px;
+  bottom: 10px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--red-bright), var(--plum), transparent);
+}
+
+.milestone {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 18px 20px 18px 0;
+}
+
+.milestone__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--red-mid);
+  color: var(--red-bright);
+  z-index: 1;
+}
+
+.milestone__label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red-mid);
+}
+
+.milestone h3 {
+  margin: 4px 0 6px;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.2;
+}
+
+.milestone p {
+  color: var(--white-dim);
+  font-size: 0.95rem;
+}
+
+.journey__main > .hs__text {
+  margin-bottom: 16px;
+}
+
+.journey__closing {
+  margin-top: 36px;
+  display: grid;
+  gap: 4px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+  line-height: 1.15;
+}
+
+/* ---------- 5. COMING SOON ---------- */
+.hs--poster {
+  background:
+    linear-gradient(180deg, var(--ink) 0%, #14100a 100%);
+}
+
+.poster__glow {
+  position: absolute;
+  z-index: -1;
+  top: -10%;
+  left: 50%;
+  width: 1100px;
+  height: 1100px;
+  margin-left: -550px;
+  background: radial-gradient(circle, rgba(255, 230, 0, 0.14), rgba(255, 122, 0, 0.07) 40%, transparent 68%);
+  pointer-events: none;
+}
+
+.poster__head {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto clamp(36px, 5vw, 56px);
+}
+
+.poster__tag {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: var(--gradient-brand);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.poster__sub {
+  margin-top: 18px;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 20px;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius-m);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(4px);
+}
+
+.highlight__icon {
+  color: var(--red-bright);
+  margin-bottom: 4px;
+}
+
+.highlight__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.highlight__label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white-faint);
+}
+
+.highlight strong {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.poster__foot {
+  margin-top: clamp(48px, 7vw, 88px);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+
+.poster__foot h3 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+}
+
+.poster__foot p {
+  max-width: 46ch;
+  color: var(--white-dim);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  margin-bottom: 10px;
+}
+
+/* ---------- 6. WHY ---------- */
+.why {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+
+.why__copy {
+  display: grid;
+  gap: 18px;
+}
+
+.why__sub {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.chips li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--ink-line);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.chips svg {
+  width: 16px;
+  height: 16px;
+  color: var(--red-bright);
+}
+
+.mission {
+  position: relative;
+  padding: clamp(28px, 4vw, 44px);
+  border-radius: 18px;
+  background: var(--gradient-brand);
+  color: var(--ink);
+  box-shadow: 0 30px 80px -30px rgba(255, 184, 0, 0.45);
+}
+
+.mission__label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.mission blockquote {
+  margin: 14px 0 0;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* ---------- Finale ---------- */
+.finale {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: clamp(80px, 12vw, 150px) 0;
+  text-align: center;
+}
+
+.finale__ring {
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  width: 760px;
+  height: 760px;
+  margin: -380px 0 0 -380px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 184, 0, 0.25);
+  box-shadow: 0 0 0 80px rgba(255, 184, 0, 0.03), 0 0 0 160px rgba(255, 184, 0, 0.02);
+}
+
+.finale__inner {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+  max-width: 820px;
+}
+
+.finale__title {
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  text-wrap: balance;
+}
+
+.finale__actions-text {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+}
+
+.finale__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.finale__signoff {
+  margin-top: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--red-bright);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .points {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .points .point:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .highlights {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .welcome,
+  .journey,
+  .why,
+  .hs__cols {
+    grid-template-columns: 1fr;
+  }
+
+  .journey__side > div {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-full {
+    min-height: calc(100svh - 64px);
+  }
+
+  .points,
+  .highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .refrain {
+    padding: 16px 18px;
+  }
+}
+
+/* ============================================================
+   SCROLL-DRIVEN MOTION
+   ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* --- reveal on entry --- */
+    .fx {
+      animation: fx-up linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 4%) entry calc(55% + var(--i, 0) * 4%);
+    }
+
+    .fx--left { animation-name: fx-left; }
+    .fx--right { animation-name: fx-right; }
+    .fx--zoom { animation-name: fx-zoom; }
+
+    @keyframes fx-up {
+      from { opacity: 0; transform: translateY(56px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes fx-left {
+      from { opacity: 0; transform: translateX(-64px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes fx-right {
+      from { opacity: 0; transform: translateX(64px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes fx-zoom {
+      from { opacity: 0; transform: translateY(40px) scale(0.9); }
+      to { opacity: 1; transform: none; }
+    }
+
+    /* --- hero parallax: layers drift at different speeds as the page scrolls --- */
+    .hero-art__layer,
+    .hero-full__inner,
+    .hero-full__cue {
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+    }
+
+    .hero-art__sky { animation-name: par-sky; }
+    .hero-art__lights { animation-name: par-lights; }
+    .hero-art__stands { animation-name: par-stands; }
+    .hero-art__field { animation-name: par-field; }
+    .hero-full__cue { animation-name: par-fade; }
+
+    .hero-full__inner > :not(.hero-full__crest) {
+      will-change: auto;
+    }
+
+    @keyframes par-sky { to { transform: translateY(18%); } }
+    @keyframes par-lights { to { transform: translateY(10%) scale(1.06); opacity: 0.4; } }
+    @keyframes par-stands { to { transform: translateY(2%); } }
+    @keyframes par-field { to { transform: translateY(-5%) scale(1.04); } }
+    @keyframes par-fade { to { opacity: 0; } }
+
+    /* hero copy lifts and fades (override the entrance animation after it ends) */
+    .hero-full__inner {
+      animation-name: par-copy;
+    }
+
+    @keyframes par-copy {
+      to { transform: translateY(-14vh); opacity: 0; }
+    }
+
+    /* --- ambient background blobs --- */
+    .hs__bg,
+    .poster__glow,
+    .finale__ring {
+      animation: par-blob linear both;
+      animation-timeline: view();
+    }
+
+    .hs__bg--b { --dir: -1; }
+
+    @keyframes par-blob {
+      from { transform: translateY(calc(var(--dir, 1) * -140px)) scale(0.85); }
+      to { transform: translateY(calc(var(--dir, 1) * 140px)) scale(1.15); }
+    }
+
+    .finale__ring {
+      animation-name: par-ring;
+    }
+
+    @keyframes par-ring {
+      from { transform: scale(0.6) rotate(-25deg); opacity: 0.3; }
+      50% { opacity: 1; }
+      to { transform: scale(1.1) rotate(25deg); opacity: 0.4; }
+    }
+
+    /* --- ticker slides sideways with scroll --- */
+    .ticker__track {
+      animation: par-ticker linear both;
+      animation-timeline: view();
+    }
+
+    @keyframes par-ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-45%); }
+    }
+
+    /* --- icons spin in, timeline line draws --- */
+    .point__icon,
+    .milestone__icon {
+      animation: pop linear both;
+      animation-timeline: view();
+      animation-range: entry 10% entry 80%;
+    }
+
+    @keyframes pop {
+      from { transform: rotate(-90deg) scale(0.5); }
+      to { transform: none; }
+    }
+
+    .timeline::before {
+      transform-origin: top;
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 60%;
+    }
+
+    @keyframes draw {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+
+    /* --- big headings drift slightly slower than the page --- */
+    .hs__title--xl,
+    .finale__title {
+      animation: par-title linear both;
+      animation-timeline: view();
+    }
+
+    @keyframes par-title {
+      from { transform: translateY(40px); }
+      to { transform: translateY(-40px); }
+    }
+
+    /* --- the mission card floats against scroll --- */
+    .mission {
+      animation-name: fx-right, float-card;
+      animation-range: entry 0% entry 55%, cover 0% cover 100%;
+      animation-composition: replace, add;
+    }
+
+    @keyframes float-card {
+      from { translate: 0 30px; }
+      to { translate: 0 -30px; }
+    }
+  }
+}

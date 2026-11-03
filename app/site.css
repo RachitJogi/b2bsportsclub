@@ -424,44 +424,112 @@ button:focus-visible {
   color: var(--red-mid);
 }
 
-/* ---------- footer ---------- */
+/* ---------- footer (compact) ---------- */
 .footer {
-  border-top: 1px solid var(--ink-line);
+  position: relative;
+  padding: 0;
+  background: var(--ink);
+  border-top: 0;
+}
+
+.footer::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: var(--gradient-brand);
 }
 
 .footer__inner {
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px 32px;
+  padding-top: 22px;
+  padding-bottom: 22px;
 }
 
-.footer__col {
+.footer__brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 12px;
 }
 
-.footer__links {
+.footer__brand strong {
+  display: block;
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+}
+
+.footer__brand small {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--white-faint);
+}
+
+.footer__nav {
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.footer__nav a {
+  display: block;
+  padding: 6px 12px;
+  border-radius: 999px;
   color: var(--white-dim);
-}
-
-.footer__links a {
   text-decoration: none;
+  transition: color 0.2s, background 0.2s;
 }
 
-.footer__links a:hover {
-  color: var(--white);
+.footer__nav a:hover {
+  color: var(--ink);
+  background: var(--red-bright);
+}
+
+.footer__social {
+  display: flex;
+  gap: 8px;
+}
+
+.footer__social a {
+  padding: 7px 16px;
+  border: 1px solid var(--ink-line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.footer__social a:hover {
+  border-color: var(--red-mid);
+  color: var(--red-bright);
 }
 
 .footer__copy {
-  margin-top: 32px;
-  font-size: 0.8rem;
+  padding-top: 14px;
+  padding-bottom: 18px;
+  border-top: 1px solid var(--ink-line-soft);
+  margin: 0 auto;
+  font-size: 0.78rem;
   color: var(--white-faint);
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .footer__inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
 }
 
 /* ---------- responsive ---------- */
