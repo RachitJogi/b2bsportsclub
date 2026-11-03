@@ -125,9 +125,6 @@ export default async function HomePage() {
 
       {/* 4 — Journey */}
       <section className="hs hs--journey" aria-labelledby="journey-title">
-        <div className="journey__watermark" aria-hidden="true">
-          WCC 4.0
-        </div>
         <div className="container">
           <Reveal className="journey__head">
             <h2 id="journey-title" className="hs__title hs__title--xl">
