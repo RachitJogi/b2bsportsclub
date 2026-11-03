@@ -1,311 +1,269 @@
 import Image from "next/image";
-import {
-  Calendar,
-  MapPin,
-  Users,
-  Star,
-  Trophy,
-  Medal,
-  Target,
-  Zap,
-  Shield,
-  PlayCircle,
-  Camera,
-  Phone,
-} from "lucide-react";
-import RegistrationForm from "@/components/RegistrationForm";
+import Link from "next/link";
+import HeroArt from "@/components/home/HeroArt";
+import Reveal from "@/components/home/Reveal";
+import Icon from "@/components/ui/Icon";
+import { getHomeStory } from "@/lib/content";
+import { pageMetadata } from "@/lib/site";
 import logo from "@/public/logo.png";
-import logoMark from "@/public/logo-mark.png";
+import "./home.css";
 
-const scoreboard = [
-  { label: "Tournament date", value: "28 Nov 2026", icon: Calendar },
-  { label: "Venue", value: "Seven Eleven Turf, Mira Road", icon: MapPin },
-  { label: "Teams", value: "10 teams", icon: Users },
-  { label: "Icon player", value: "1 per team", icon: Star },
-];
+export const revalidate = 3600;
 
-const auctionSteps = [
-  "The squads will be built.",
-  "The strategies will unfold.",
-  "The bids will rise.",
-];
+export const metadata = pageMetadata({
+  title: "B2B Sports Club — Mumbai's turf cricket community",
+  description:
+    "B2B Sports Club is a Mumbai-based turf cricket community organizing tournaments, leagues and player auctions. Path to Glory – Chapter 2 is coming on 28 November 2026.",
+  path: "/",
+});
 
-const prizesTop = [
-  {
-    title: "Champions",
-    amount: "₹2,00,000",
-    icon: Trophy,
-    badge: "1ST PLACE",
-    tier: "gold",
-  },
-  {
-    title: "Runners-up",
-    amount: "₹1,25,000",
-    icon: Medal,
-    badge: "2ND PLACE",
-    tier: "silver",
-  },
-];
+export default async function HomePage() {
+  const s = await getHomeStory();
+  const { hero, welcome, brotherhood, journey, comingSoon, why, final } = s;
+  const ticker = Array.from({ length: 6 }, () => welcome.banner);
 
-const prizesAwards = [
-  {
-    title: "MVP",
-    amount: "₹10,000",
-    icon: Star,
-    badge: "MVP",
-  },
-  {
-    title: "Best Batsman",
-    amount: "₹5,000",
-    icon: Target,
-    badge: "BATTING",
-  },
-  {
-    title: "Best Bowler",
-    amount: "₹5,000",
-    icon: Zap,
-    badge: "BOWLING",
-  },
-  {
-    title: "Best Fielder",
-    amount: "₹5,000",
-    icon: Shield,
-    badge: "FIELDING",
-  },
-];
-
-const contacts = [
-  { name: "Vineet Doshi", phone: "+91 90049 44400", tel: "+919004944400" },
-  { name: "Vaibhav Bhatt", phone: "+91 88281 31806", tel: "+918828131806" },
-];
-
-export default function Home() {
   return (
     <>
-      <header className='topbar'>
-        <div className='topbar__inner'>
-          <div className='topbar__brand'>
-            <Image src={logoMark} alt='' height={32} width={46} />
-            B2B SPORTS CLUB
-          </div>
-          <div className='topbar__status'>
-            <span className='topbar__dot' aria-hidden='true' />
-            REGISTRATIONS OPEN
+      {/* 1 — Hero */}
+      <section className="hero-full" aria-labelledby="hero-title">
+        <HeroArt />
+        <div className="container hero-full__inner">
+          <Image src={logo} alt="B2B Sports Club crest" className="hero-full__crest" priority />
+          <span className="hero-full__brand">{hero.brand.toUpperCase()}</span>
+          <h1 id="hero-title">
+            {hero.title}
+            <br />
+            <span className="gradient-text">{hero.highlight}</span>
+          </h1>
+          <p className="hero-full__tagline">{hero.tagline}</p>
+          <div className="hero-full__actions">
+            <Link className="btn btn--primary" href={`/tournaments/${comingSoon.tournamentSlug}`}>
+              Path to Glory – Chapter 2
+            </Link>
+            <Link className="btn btn--ghost" href="/about">
+              About the club
+            </Link>
           </div>
         </div>
-      </header>
+        <span className="hero-full__cue" aria-hidden="true">
+          <i />
+        </span>
+      </section>
 
-      <main>
-        {/* ---------------- HERO ---------------- */}
-        <section className='hero'>
-          <div className='hero__glow' aria-hidden='true' />
-          <div className='container hero__inner'>
-            <Image
-              src={logo}
-              alt='B2B Sports Club'
-              className='hero__crest'
-              priority
-            />
-            <h1>
-              PATH TO GLORY
-              <br />
-              <span className='gradient-text'>CHAPTER 2</span>
-            </h1>
-            <span className='hero__chapter'>
-              NEW CHAPTER. <b>SAME BROTHERHOOD.</b>
-            </span>
-            <p className='hero__tagline'>
-              The rivalry gets bigger. The stakes get higher.
-            </p>
-            <p className='hero__body'>
-              Step onto the turf, represent your team, battle through every
-              over, and chase the ultimate glory — ten teams, one icon player
-              each, and a single destination.
-            </p>
-            <div className='hero__actions'>
-              <a className='btn btn--primary' href='#register'>
-                Register now
-              </a>
-              <a className='btn btn--ghost' href='#prizes'>
-                Prize money
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- SCOREBOARD STRIP ---------------- */}
-        <section className='scoreboard'>
-          <div className='container'>
-            <div className='scoreboard__grid'>
-              {scoreboard.map(({ label, value, icon: Icon }) => (
-                <div className='scoreboard__cell' key={label}>
-                  <div className='scoreboard__label'>
-                    <Icon aria-hidden='true' />
-                    {label.toUpperCase()}
-                  </div>
-                  <div className='scoreboard__value'>{value}</div>
-                </div>
+      {/* 2 — Welcome */}
+      <section className="hs hs--welcome" aria-labelledby="welcome-title">
+        <div className="container">
+          <div className="welcome">
+            <Reveal fx="left" className="welcome__copy">
+              <h2 id="welcome-title" className="welcome__lead">
+                {welcome.paragraphs[0]}
+              </h2>
+              <p className="hs__text">{welcome.paragraphs[1]}</p>
+            </Reveal>
+            <ol className="welcome__refrain list-reset">
+              {welcome.refrain.map((line, i) => (
+                <Reveal as="li" fx="right" i={i} key={line} className="refrain">
+                  <span className="refrain__n">{String(i + 1).padStart(2, "0")}</span>
+                  {line}
+                </Reveal>
               ))}
-            </div>
+            </ol>
           </div>
-        </section>
-
-        {/* ---------------- AUCTION ---------------- */}
-        <section className='section' id='auction'>
-          <div className='container auction'>
-            <div>
-              <h2 className='section-heading'>THE AUCTION</h2>
-              <div className='section-kicker'>
-                <span className='eyebrow'>
-                  Build your army before you take the field.
-                </span>
-              </div>
-            </div>
-
-            <div className='ticket'>
-              <div className='ticket__label'>AUCTION DAY</div>
-              <div className='ticket__date'>23 OCT 2026</div>
-            </div>
+          <Reveal as="p" className="welcome__closing">
+            {welcome.closing}
+          </Reveal>
+        </div>
+        <div className="ticker" role="note" aria-label={welcome.banner}>
+          <div className="ticker__track" aria-hidden="true">
+            {ticker.map((t, i) => (
+              <span key={i}>
+                {t}
+                <b>◆</b>
+              </span>
+            ))}
           </div>
-        </section>
+          <span className="sr-only">{welcome.banner}</span>
+        </div>
+      </section>
 
-        {/* ---------------- PRIZE LEDGER ---------------- */}
-        <section className='section' id='prizes'>
-          <div className='container'>
-            <h2 className='section-heading'>THE GLORY HAS A PRICE</h2>
-            <div className='section-kicker'>
-              <span className='eyebrow'>What&apos;s on the table.</span>
-            </div>
-
-            <div className='prize-grid prize-grid--top'>
-              {prizesTop.map(({ title, amount, icon: Icon, badge, tier }) => (
-                <div className={`prize-card prize-card--${tier}`} key={title}>
-                  <div className='prize-card__head'>
-                    <div className='prize-card__icon'>
-                      <Icon aria-hidden='true' />
-                    </div>
-                    <span
-                      className={`badge${
-                        tier === "gold" ? " badge--accent" : ""
-                      }`}
-                    >
-                      {badge}
-                    </span>
-                  </div>
-                  <h3 className='prize-card__title'>{title}</h3>
-                  <div className='prize-card__amount gradient-text'>
-                    {amount}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className='prize-grid prize-grid--awards'>
-              {prizesAwards.map(({ title, amount, icon: Icon, badge }) => (
-                <div className='prize-card prize-card--award' key={title}>
-                  <div className='prize-card__head'>
-                    <div className='prize-card__icon'>
-                      <Icon aria-hidden='true' />
-                    </div>
-                    <span className='badge'>{badge}</span>
-                  </div>
-                  <h3 className='prize-card__title'>{title}</h3>
-                  <div className='prize-card__amount gradient-text'>
-                    {amount}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- BROADCAST ---------------- */}
-        <section className='section'>
-          <div className='container'>
-            <h2 className='section-heading'>EXPERIENCE THE ACTION</h2>
-            <div className='section-kicker'>
-              <span className='eyebrow'>Play it. Capture it. Share it.</span>
-            </div>
-
-            <div className='broadcast' style={{ marginTop: 36 }}>
-              <div className='broadcast__card'>
-                <div className='broadcast__icon'>
-                  <PlayCircle aria-hidden='true' />
-                </div>
-                <h3>Live broadcast - YouTube</h3>
-              </div>
-              <div className='broadcast__card'>
-                <div className='broadcast__icon'>
-                  <Camera aria-hidden='true' />
-                </div>
-                <h3>Social media coverage - Instagram</h3>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ---------------- CLOSING STATEMENT ---------------- */}
-        <section className='statement'>
-          <div className='container'>
-            <span className='eyebrow'>
-              ONE TOURNAMENT. TEN TEAMS. ONE DESTINATION.
-            </span>
-            <h2 style={{ marginTop: 16 }}>
-              This isn&apos;t just about winning matches.
+      {/* 3 — Brotherhood */}
+      <section className="hs hs--raised" aria-labelledby="brotherhood-title">
+        <div className="hs__bg hs__bg--a" aria-hidden="true" />
+        <div className="container">
+          <Reveal className="hs__head">
+            <h2 id="brotherhood-title" className="hs__title">
+              {brotherhood.title}
             </h2>
-            <p>
-              It&apos;s about the moments, the rivalries, the brotherhood and
-              the memories that stay long after the final ball.
-            </p>
-            <p className='statement__brotherhood'>
-              Are you ready to write your chapter?
-            </p>
-          </div>
-        </section>
-
-        {/* ---------------- REGISTRATION ---------------- */}
-        <section className='register' id='register'>
-          <div className='container'>
-            <div className='register__head'>
-              <h2>REGISTER NOW</h2>
-              <span className='eyebrow'>Your Path to Glory starts here.</span>
+            <div className="hs__cols">
+              {brotherhood.paragraphs.map((p) => (
+                <p className="hs__text" key={p}>
+                  {p}
+                </p>
+              ))}
             </div>
-            <RegistrationForm />
-
-            <div className='register__contact'>
-              <p className='register__contact-label'>
-                For any queries, please contact
-              </p>
-              <div className='register__contact-list'>
-                {contacts.map(({ name, phone, tel }) => (
-                  <a
-                    className='register__contact-item'
-                    href={`tel:${tel}`}
-                    key={name}
-                  >
-                    <Phone aria-hidden='true' />
-                    <span>
-                      <strong>{name}</strong> — {phone}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className='footer'>
-        <div className='container footer__inner'>
-          <div className='footer__brand'>
-            <Image src={logoMark} alt='' height={28} width={41} />
-            <span>B2B SPORTS CLUB</span>
-          </div>
-          <div className='footer__meta'>
-            Path to Glory · Chapter 2 · 28 Nov 2026
-          </div>
+          </Reveal>
+          <Reveal as="h3" className="hs__subtitle">
+            {brotherhood.pointsTitle}
+          </Reveal>
+          <ul className="points list-reset">
+            {brotherhood.points.map((p, i) => (
+              <Reveal as="li" fx="zoom" i={i} key={p.title} className="point">
+                <span className="point__n">{String(i + 1).padStart(2, "0")}</span>
+                <span className="point__icon">
+                  <Icon name={p.icon} />
+                </span>
+                <h4>{p.title}</h4>
+                <p>{p.description}</p>
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal as="p" className="hs__pull">
+            {brotherhood.closing}
+          </Reveal>
         </div>
-      </footer>
+      </section>
+
+      {/* 4 — Journey */}
+      <section className="hs hs--journey" aria-labelledby="journey-title">
+        <div className="container">
+          <Reveal className="journey__head">
+            <h2 id="journey-title" className="hs__title hs__title--xl">
+              {journey.title}
+            </h2>
+            <p className="journey__intro">{journey.intro}</p>
+          </Reveal>
+          <ol className="trophies list-reset">
+            {journey.milestones.map((m, i) => (
+              <Reveal as="li" fx="zoom" i={i} key={m.label} className="trophy">
+                <span className="trophy__n">{String(i + 1).padStart(2, "0")}</span>
+                <span className="trophy__icon">
+                  <Icon name={m.icon} />
+                </span>
+                <span className="trophy__label">{m.label}</span>
+                <h3>{m.title}</h3>
+                <p>{m.description}</p>
+              </Reveal>
+            ))}
+          </ol>
+          <Reveal className="journey__story">
+            {journey.paragraphs.map((p) => (
+              <p className="hs__text" key={p}>
+                {p}
+              </p>
+            ))}
+          </Reveal>
+          <ul className="journey__closing list-reset">
+            {journey.closing.map((c, i) => (
+              <Reveal as="li" i={i} key={c}>
+                <span className="gradient-text">{c}</span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 5 — Coming soon */}
+      <section className="hs hs--poster" aria-labelledby="coming-title">
+        <div className="poster__glow" aria-hidden="true" />
+        <div className="container">
+          <Reveal className="poster__head">
+            <span className="poster__tag">{comingSoon.tagline}</span>
+            <h2 id="coming-title" className="hs__title hs__title--xl">
+              {comingSoon.title}
+            </h2>
+            <p className="poster__sub gradient-text">{comingSoon.subtitle}</p>
+          </Reveal>
+          <div className="hs__cols">
+            {comingSoon.paragraphs.map((p, i) => (
+              <Reveal as="p" i={i} className="hs__text" key={p}>
+                {p}
+              </Reveal>
+            ))}
+          </div>
+          <Reveal as="h3" className="hs__subtitle">
+            {comingSoon.highlightsTitle}
+          </Reveal>
+          <ul className="highlights list-reset">
+            {comingSoon.highlights.map((h, i) => (
+              <Reveal as="li" fx="zoom" i={i % 4} key={h.label} className="highlight">
+                <span className="highlight__icon">
+                  <Icon name={h.icon} />
+                </span>
+                <span className="highlight__label">{h.label}</span>
+                <strong>{h.value}</strong>
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal className="poster__foot">
+            <h3>{comingSoon.closingTitle}</h3>
+            <p>{comingSoon.closing}</p>
+            <Link className="btn btn--primary" href={`/tournaments/${comingSoon.tournamentSlug}`}>
+              View tournament details
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 6 — Why B2B */}
+      <section className="hs hs--raised" aria-labelledby="why-title">
+        <div className="hs__bg hs__bg--b" aria-hidden="true" />
+        <div className="container why">
+          <Reveal fx="left" className="why__copy">
+            <h2 id="why-title" className="hs__title">
+              {why.title}
+            </h2>
+            <p className="why__sub gradient-text">{why.subtitle}</p>
+            {why.paragraphs.map((p) => (
+              <p className="hs__text" key={p}>
+                {p}
+              </p>
+            ))}
+            <ul className="chips list-reset" aria-label="What we bring together">
+              {why.elements.map((e) => (
+                <li key={e.title}>
+                  <Icon name={e.icon} />
+                  {e.title}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal fx="right" className="mission">
+            <span className="mission__label">{why.missionLabel}</span>
+            <blockquote>{why.mission}</blockquote>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Closing section */}
+      <section className="finale" aria-labelledby="final-title">
+        <div className="finale__ring" aria-hidden="true" />
+        <div className="container finale__inner">
+          <Reveal as="h2" className="finale__title">
+            <span id="final-title" className="gradient-text">
+              {final.title}
+            </span>
+          </Reveal>
+          {final.paragraphs.map((p) => (
+            <Reveal as="p" className="hs__text" key={p}>
+              {p}
+            </Reveal>
+          ))}
+          <Reveal as="p" className="finale__actions-text">
+            {final.actions}
+          </Reveal>
+          <Reveal className="finale__buttons">
+            <Link className="btn btn--primary" href="/tournaments">
+              Explore tournaments
+            </Link>
+            <Link className="btn btn--ghost" href="/contact">
+              Join the community
+            </Link>
+          </Reveal>
+          <Reveal as="p" className="finale__signoff">
+            {final.signoff}
+          </Reveal>
+        </div>
+      </section>
     </>
   );
 }
