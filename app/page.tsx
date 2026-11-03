@@ -17,6 +17,9 @@ import RegistrationForm from "@/components/RegistrationForm";
 import logo from "@/public/logo.png";
 import logoMark from "@/public/logo-mark.png";
 
+// Registrations are closed. Set to true to show the registration form again.
+const REGISTRATIONS_OPEN = false;
+
 const scoreboard = [
   { label: "Tournament date", value: "28 Nov 2026", icon: Calendar },
   { label: "Venue", value: "Seven Eleven Turf, Mira Road", icon: MapPin },
@@ -164,7 +167,7 @@ export default function Home() {
 
             <div className='ticket'>
               <div className='ticket__label'>AUCTION DAY</div>
-              <div className='ticket__date'>23 OCT 2026</div>
+              <div className='ticket__date'>16th November 2026</div>
             </div>
           </div>
         </section>
@@ -266,11 +269,29 @@ export default function Home() {
         {/* ---------------- REGISTRATION ---------------- */}
         <section className='register' id='register'>
           <div className='container'>
-            <div className='register__head'>
-              <h2>REGISTER NOW</h2>
-              <span className='eyebrow'>Your Path to Glory starts here.</span>
-            </div>
-            <RegistrationForm />
+            {REGISTRATIONS_OPEN ? (
+              <>
+                <div className='register__head'>
+                  <h2>REGISTER NOW</h2>
+                  <span className='eyebrow'>
+                    Your Path to Glory starts here.
+                  </span>
+                </div>
+                <RegistrationForm />
+              </>
+            ) : (
+              <div className='register__head register__closed'>
+                <span className='eyebrow'>REGISTRATIONS CLOSED</span>
+                <h2>
+                  PATH TO GLORY <span className='gradient-text'>CHAPTER 2</span>{" "}
+                  IS COMING
+                </h2>
+                <p>
+                  The squads are being drawn and the stage is being set. Get
+                  ready — the next chapter is about to be written.
+                </p>
+              </div>
+            )}
 
             <div className='register__contact'>
               <p className='register__contact-label'>
