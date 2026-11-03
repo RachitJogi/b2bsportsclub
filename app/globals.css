@@ -1050,3 +1050,24 @@ img {
     align-items: flex-start;
   }
 }
+.register__closed {
+  margin-bottom: 0;
+  padding: 48px 28px;
+  background: var(--ink);
+  color: var(--white);
+  border-top: 4px solid var(--red-mid);
+  border-radius: var(--radius-m);
+  max-width: 720px;
+}
+
+.register__closed .eyebrow {
+  color: var(--red-bright);
+}
+
+.register__closed h2 {
+  color: var(--white);
+}
+
+.register__closed p {
+  color: var(--white-dim);
+}
