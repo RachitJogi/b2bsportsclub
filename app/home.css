@@ -512,8 +512,9 @@
 }
 
 .poster__tag {
-  display: inline-block;
-  margin-bottom: 20px;
+  display: block;
+  width: fit-content;
+  margin: 0 auto 62px;
   padding: 7px 18px;
   border-radius: 999px;
   background: var(--gradient-brand);
@@ -638,9 +639,9 @@
   position: relative;
   padding: clamp(28px, 4vw, 44px);
   border-radius: 18px;
-  background: var(--gradient-brand);
-  color: var(--ink);
-  box-shadow: 0 30px 80px -30px rgba(200, 31, 61, 0.45);
+  border: 2px solid var(--red-bright);
+  background: transparent;
+  color: var(--white);
 }
 
 .mission__label {
