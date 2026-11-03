@@ -366,14 +366,9 @@
 /* ---------- 4. JOURNEY ---------- */
 .journey {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: clamp(32px, 6vw, 88px);
-  align-items: start;
-}
-
-.journey__side > div {
-  position: sticky;
-  top: 120px;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 56px);
+  max-width: 860px;
 }
 
 .journey__intro {
@@ -695,14 +690,9 @@
 
 @media (max-width: 860px) {
   .welcome,
-  .journey,
   .why,
   .hs__cols {
     grid-template-columns: 1fr;
-  }
-
-  .journey__side > div {
-    position: static;
   }
 }
 
