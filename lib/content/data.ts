@@ -2,6 +2,7 @@ import type {
   AboutContent,
   EventItem,
   HomeContent,
+  HomeStory,
   SiteSettings,
   Tournament,
 } from "./types";
@@ -231,3 +232,151 @@ export const events: EventItem[] = [
     icon: "users",
   },
 ];
+
+export const homeStory: HomeStory = {
+  hero: {
+    brand: "B2B Sports Club",
+    title: "Where Passion Meets Competition.",
+    highlight: "Where Brotherhood Builds Champions.",
+    tagline: "Mumbai's Turf Cricket Community. One Game. Countless Memories.",
+  },
+  welcome: {
+    paragraphs: [
+      "Welcome to B2B Sports Club — where cricket is more than just a game. It’s about passion, teamwork, competition, and the brotherhood that brings people together.",
+      "We are a Mumbai-based sports community dedicated to organizing exciting turf cricket tournaments, competitive cricket leagues, player auctions, and sporting events across Mumbai. From thrilling match-day moments to unforgettable championship victories, we create platforms where players showcase their talent, teams build their legacy, and friendships turn into lifelong connections.",
+    ],
+    refrain: [
+      "Every tournament tells a story.",
+      "Every match creates a memory.",
+      "Every champion earns their glory.",
+    ],
+    closing:
+      "Welcome to the B2B Sports Club family — where every game has a purpose and every player has a chance to shine.",
+    banner: "PATH TO GLORY - CHAPTER 2 | REGISTRATION CLOSED",
+  },
+  brotherhood: {
+    title: "More than cricket. It's a brotherhood.",
+    paragraphs: [
+      "At B2B Sports Club, we believe sports have the power to connect people beyond boundaries. Our tournaments bring together passionate cricketers, competitive teams, sports enthusiasts, and cricket lovers from across Mumbai.",
+      "From intense turf cricket battles to professionally organized tournaments featuring team owners, player icons, exciting auctions, and competitive match formats, we focus on delivering an experience that goes beyond the scoreboard.",
+    ],
+    pointsTitle: "What makes B2B Sports Club special?",
+    points: [
+      {
+        title: "Competitive Turf Cricket",
+        description:
+          "High-energy matches where skill, strategy, and teamwork make the difference.",
+        icon: "zap",
+      },
+      {
+        title: "Organized Cricket Tournaments",
+        description:
+          "Structured tournaments designed to deliver a memorable sporting experience.",
+        icon: "shield",
+      },
+      {
+        title: "Exciting Player Auctions",
+        description:
+          "Bringing strategy and team-building together before the first ball is bowled.",
+        icon: "gavel",
+      },
+      {
+        title: "A Strong Sporting Community",
+        description:
+          "Connecting players, owners, teams, and cricket enthusiasts across Mumbai.",
+        icon: "users",
+      },
+      {
+        title: "Champions, Memories & Recognition",
+        description: "Celebrating outstanding performances and the spirit of the game.",
+        icon: "medal",
+      },
+    ],
+    closing:
+      "We don't just organize tournaments. We create experiences that players look forward to and memories they carry forward.",
+  },
+  journey: {
+    title: "Our Journey. Our Champions. Our Glory.",
+    intro:
+      "Every tournament we organize adds another chapter to the B2B Sports Club story.",
+    paragraphs: [
+      "From the electrifying battles of WCC 4.0, where Turbo Titans claimed the championship, to the exciting journey of the Golden Leaf Cup and other competitive cricket events, our tournaments have brought teams together to compete, connect, and celebrate the spirit of cricket.",
+      "Each edition has strengthened our community and raised the excitement for what comes next.",
+    ],
+    milestones: [
+      {
+        label: "WCC 4.0",
+        title: "Turbo Titans claimed the championship",
+        description: "Electrifying battles that crowned a champion.",
+        icon: "trophy",
+      },
+      {
+        label: "Golden Leaf Cup",
+        title: "A journey of competitive cricket",
+        description: "Teams coming together to compete, connect and celebrate.",
+        icon: "star",
+      },
+      {
+        label: "And more",
+        title: "Other competitive cricket events",
+        description: "Each edition strengthening the community.",
+        icon: "target",
+      },
+    ],
+    closing: [
+      "The journey continues.",
+      "The competition gets bigger.",
+      "And the next chapter awaits.",
+    ],
+  },
+  comingSoon: {
+    title: "Coming Soon: Path To Glory – Chapter 2",
+    subtitle: "New Chapter. Same Brotherhood. Bigger Dreams.",
+    tagline: "The wait is over. The next battle for glory is here!",
+    paragraphs: [
+      "Path To Glory – Chapter 2 is set to bring together competitive teams, passionate players, strategic team-building, and unforgettable cricketing moments for another exciting edition of the B2B Sports Club experience.",
+      "With the player auction setting the stage and every match bringing a fresh challenge, teams will compete for more than just a trophy — they will compete for pride, recognition, and a place in the history of the tournament.",
+    ],
+    highlightsTitle: "Tournament Highlights",
+    highlights: [
+      { label: "Tournament Date", value: "28 November 2026", icon: "calendar" },
+      { label: "Venue", value: "Seven Eleven Turf, Mira Road", icon: "map-pin" },
+      { label: "Player Auction", value: "TBD", icon: "gavel" },
+      { label: "Teams", value: "10", icon: "users" },
+      { label: "Professional Marquee Players", value: "1 per team", icon: "star" },
+      { label: "Professional Icon Players", value: "1 per team", icon: "medal" },
+      { label: "Live Broadcast", value: "YouTube", icon: "play" },
+      { label: "Social Media Coverage", value: "Instagram", icon: "camera" },
+    ],
+    closingTitle: "The Glory Awaits. Are You Ready?",
+    closing:
+      "Ten teams. One destination. A journey built on teamwork, determination, and the hunger to become champions.",
+    tournamentSlug: "path-to-glory-chapter-2",
+  },
+  why: {
+    title: "Why B2B Sports Club?",
+    subtitle: "Built for the Game. Driven by the Community.",
+    paragraphs: [
+      "We bring together the key elements that make a cricket tournament truly memorable: competitive cricket, organized execution, team spirit, player recognition, and a passionate sporting community.",
+      "Whether you're a player looking for your next challenge, a team owner building a winning squad, or a cricket enthusiast who loves the excitement of turf cricket, B2B Sports Club is where you belong.",
+    ],
+    missionLabel: "Our mission is simple:",
+    mission:
+      "To create engaging sporting experiences that bring people together, encourage healthy competition, and build a stronger cricket community across Mumbai.",
+    elements: [
+      { title: "Competitive cricket", description: "", icon: "zap" },
+      { title: "Organized execution", description: "", icon: "shield" },
+      { title: "Team spirit", description: "", icon: "users" },
+      { title: "Player recognition", description: "", icon: "medal" },
+      { title: "Passionate community", description: "", icon: "heart" },
+    ],
+  },
+  final: {
+    title: "Your next cricket story starts here.",
+    paragraphs: [
+      "Every great innings starts with a single ball. Every champion starts with a dream. And every unforgettable tournament begins with people who share a passion for the game.",
+    ],
+    actions: "Be a part of the action. Join the community. Compete with pride. Celebrate the brotherhood.",
+    signoff: "B2B Sports Club — Play Together. Compete Stronger. Rise to Glory.",
+  },
+};

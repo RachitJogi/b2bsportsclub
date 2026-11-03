@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/anton/400.css";
-import "@fontsource/barlow/400.css";
-import "@fontsource/barlow/500.css";
-import "@fontsource/barlow/600.css";
-import "@fontsource/barlow/700.css";
+import "@fontsource/exo/400.css";
+import "@fontsource/exo/500.css";
+import "@fontsource/exo/600.css";
+import "@fontsource/exo/700.css";
+import "@fontsource/exo/800.css";
 import "./globals.css";
 import "./site.css";
 import Footer from "@/components/layout/Footer";
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0a0d22",
+  themeColor: "#0a0a0a",
   width: "device-width",
   initialScale: 1,
 };

@@ -3,6 +3,7 @@ import {
   aboutContent,
   events,
   homeContent,
+  homeStory,
   siteSettings,
   tournaments,
 } from "./data";
@@ -10,6 +11,7 @@ import type {
   AboutContent,
   EventItem,
   HomeContent,
+  HomeStory,
   SiteSettings,
   Tournament,
 } from "./types";
@@ -57,3 +59,5 @@ export const getUpcomingEvents = cache(
       .filter((e) => e.date >= from)
       .sort((a, b) => a.date.localeCompare(b.date))
 );
+
+export const getHomeStory = cache(async (): Promise<HomeStory> => homeStory);
