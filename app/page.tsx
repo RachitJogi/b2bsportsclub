@@ -124,44 +124,44 @@ export default async function HomePage() {
       </section>
 
       {/* 4 — Journey */}
-      <section className="hs" aria-labelledby="journey-title">
-        <div className="container journey">
-          <div className="journey__side">
-            <Reveal>
-              <h2 id="journey-title" className="hs__title">
-                {journey.title}
-              </h2>
-              <p className="journey__intro">{journey.intro}</p>
-            </Reveal>
-          </div>
-          <div className="journey__main">
-            <ol className="timeline list-reset">
-              {journey.milestones.map((m, i) => (
-                <Reveal as="li" fx="right" i={i} key={m.label} className="milestone">
-                  <span className="milestone__icon">
-                    <Icon name={m.icon} />
-                  </span>
-                  <div>
-                    <span className="milestone__label">{m.label}</span>
-                    <h3>{m.title}</h3>
-                    <p>{m.description}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-            {journey.paragraphs.map((p) => (
-              <Reveal as="p" className="hs__text" key={p}>
-                {p}
+      <section className="hs hs--journey" aria-labelledby="journey-title">
+        <div className="journey__watermark" aria-hidden="true">
+          WCC 4.0
+        </div>
+        <div className="container">
+          <Reveal className="journey__head">
+            <h2 id="journey-title" className="hs__title hs__title--xl">
+              {journey.title}
+            </h2>
+            <p className="journey__intro">{journey.intro}</p>
+          </Reveal>
+          <ol className="trophies list-reset">
+            {journey.milestones.map((m, i) => (
+              <Reveal as="li" fx="zoom" i={i} key={m.label} className="trophy">
+                <span className="trophy__n">{String(i + 1).padStart(2, "0")}</span>
+                <span className="trophy__icon">
+                  <Icon name={m.icon} />
+                </span>
+                <span className="trophy__label">{m.label}</span>
+                <h3>{m.title}</h3>
+                <p>{m.description}</p>
               </Reveal>
             ))}
-            <ul className="journey__closing list-reset">
-              {journey.closing.map((c, i) => (
-                <Reveal as="li" i={i} key={c} className="gradient-text">
-                  {c}
-                </Reveal>
-              ))}
-            </ul>
-          </div>
+          </ol>
+          <Reveal className="journey__story">
+            {journey.paragraphs.map((p) => (
+              <p className="hs__text" key={p}>
+                {p}
+              </p>
+            ))}
+          </Reveal>
+          <ul className="journey__closing list-reset">
+            {journey.closing.map((c, i) => (
+              <Reveal as="li" i={i} key={c}>
+                <span className="gradient-text">{c}</span>
+              </Reveal>
+            ))}
+          </ul>
         </div>
       </section>
 
