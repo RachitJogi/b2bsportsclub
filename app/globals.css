@@ -1,35 +1,31 @@
 /* ============================================================
    B2B SPORTS CLUB — design tokens
-   Day-Night Floodlit — Midnight Navy (60%), Electric Cyan (30%),
-   Stadium Gold (10%), Deep Charcoal for cards.
+   Palette pulled directly from the club crest gradient.
    ============================================================ */
 :root {
   --font-display: "Exo";
   --font-body: "Exo";
 
-  --ink: #0b132b; /* midnight navy */
-  --ink-raised: #1c2541; /* deep charcoal (card UI) */
-  --ink-line: rgba(255, 255, 255, 0.14);
-  --ink-line-soft: rgba(255, 255, 255, 0.07);
+  --ink: #0a0d22;
+  --ink-raised: #12172f;
+  --ink-line: rgba(247, 245, 240, 0.14);
+  --ink-line-soft: rgba(247, 245, 240, 0.07);
 
-  --paper: #f3f9fc;
-  --paper-line: rgba(11, 19, 43, 0.12);
-  --paper-line-soft: rgba(11, 19, 43, 0.06);
+  --paper: #fdfcf9;
+  --paper-line: rgba(16, 22, 63, 0.1);
+  --paper-line-soft: rgba(16, 22, 63, 0.06);
 
-  --navy: #0b132b;
-  --white: #ffffff;
-  --white-dim: rgba(255, 255, 255, 0.72);
-  --white-faint: rgba(255, 255, 255, 0.52);
+  --navy: #10163f;
+  --white: #f7f5f0;
+  --white-dim: rgba(247, 245, 240, 0.68);
+  --white-faint: rgba(247, 245, 240, 0.44);
 
-  --cyan: #00e5ff; /* electric cyan: buttons, nav, highlights */
-  --cyan-mid: #00b8d4;
-  --cyan-deep: #0097b8;
-  --cyan-ink: #006b80; /* cyan for text on light paper (AA) */
-  --gold: #ffd700; /* stadium gold: trophies, winner badges, stars */
-  --gold-soft: rgba(255, 215, 0, 0.35);
+  --red-bright: #ed3130;
+  --red-mid: #c81f3d;
+  --plum: #3c0d33;
 
-  --gradient-brand: linear-gradient(115deg, var(--cyan) 0%, var(--cyan-mid) 55%, var(--cyan-deep) 100%);
-  --gradient-brand-soft: linear-gradient(115deg, rgba(0, 229, 255, 0.16), rgba(0, 151, 184, 0.16));
+  --gradient-brand: linear-gradient(115deg, var(--red-bright) 0%, var(--red-mid) 48%, var(--plum) 100%);
+  --gradient-brand-soft: linear-gradient(115deg, rgba(237, 49, 48, 0.16), rgba(60, 13, 51, 0.16));
 
   --radius-s: 4px;
   --radius-m: 10px;
@@ -142,7 +138,7 @@ img {
 .section-kicker .index {
   font-family: var(--font-display), sans-serif;
   font-size: 1rem;
-  color: var(--cyan);
+  color: var(--red-bright);
 }
 
 .section-lede {
@@ -198,8 +194,8 @@ img {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.28);
+  background: var(--red-bright);
+  box-shadow: 0 0 0 3px rgba(237, 49, 48, 0.22);
 }
 
 /* ============================================================
@@ -219,7 +215,7 @@ img {
   width: 900px;
   height: 900px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, rgba(0, 184, 212, 0.1) 45%, transparent 70%);
+  background: radial-gradient(circle, rgba(200, 31, 61, 0.28) 0%, rgba(60, 13, 51, 0.12) 45%, transparent 70%);
   pointer-events: none;
 }
 
@@ -329,13 +325,13 @@ img {
 
 .btn--primary {
   background: var(--gradient-brand);
-  color: var(--ink);
-  box-shadow: 0 10px 30px -12px rgba(0, 229, 255, 0.35);
+  color: var(--white);
+  box-shadow: 0 10px 30px -12px rgba(200, 31, 61, 0.55);
 }
 
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 14px 34px -10px rgba(0, 229, 255, 0.45);
+  box-shadow: 0 14px 34px -10px rgba(200, 31, 61, 0.65);
 }
 
 .btn--ghost {
@@ -387,7 +383,7 @@ img {
 .scoreboard__label svg {
   width: 40px;
   height: 40px;
-  color: var(--cyan);
+  color: var(--red-bright);
 }
 
 .scoreboard__value {
@@ -427,7 +423,7 @@ img {
 .auction__step-index {
   font-family: var(--font-display), sans-serif;
   font-size: 1.1rem;
-  color: var(--cyan);
+  color: var(--red-bright);
   min-width: 2ch;
 }
 
@@ -506,7 +502,7 @@ img {
 .ticket__row-label svg {
   width: 15px;
   height: 15px;
-  color: var(--cyan);
+  color: var(--red-bright);
   flex-shrink: 0;
 }
 
@@ -553,7 +549,7 @@ img {
   border: 1px solid transparent;
   border-image: var(--gradient-brand) 1;
   background:
-    radial-gradient(circle at 20% 15%, rgba(0, 229, 255, 0.16), transparent 55%),
+    radial-gradient(circle at 20% 15%, rgba(237, 49, 48, 0.18), transparent 55%),
     var(--ink-raised);
 }
 
@@ -589,14 +585,14 @@ img {
 }
 
 .prize-card--gold .prize-card__icon {
-  background: var(--gold);
+  background: var(--gradient-brand);
   border-color: transparent;
 }
 
 .prize-card--gold .prize-card__icon svg {
   width: 26px;
   height: 26px;
-  color: var(--ink);
+  color: var(--white);
 }
 
 .prize-card__kicker {
@@ -610,7 +606,7 @@ img {
 }
 
 .prize-card--gold .prize-card__kicker {
-  color: var(--cyan);
+  color: var(--red-bright);
 }
 
 .prize-card__title {
@@ -631,8 +627,8 @@ img {
 }
 
 .badge--accent {
-  color: var(--gold);
-  border-color: var(--gold-soft);
+  color: var(--red-bright);
+  border-color: rgba(237, 49, 48, 0.35);
 }
 
 /* award (small) cards */
@@ -655,7 +651,7 @@ img {
 .prize-card--award .prize-card__icon svg {
   width: 26px;
   height: 26px;
-  color: var(--gold);
+  color: var(--red-bright);
 }
 
 .prize-card--award .prize-card__title {
@@ -702,7 +698,7 @@ img {
 .broadcast__icon svg {
   width: 19px;
   height: 19px;
-  color: var(--ink);
+  color: var(--white);
 }
 
 .broadcast__card h3 {
@@ -773,7 +769,7 @@ img {
 }
 
 .register__head .eyebrow {
-  color: var(--cyan-ink);
+  color: var(--red-mid);
 }
 
 .register__head h2 {
@@ -784,7 +780,7 @@ img {
 
 .register__head p {
   margin-top: 16px;
-  color: rgba(11, 19, 43, 0.68);
+  color: rgba(16, 22, 63, 0.68);
   font-size: 1.05rem;
 }
 
@@ -792,11 +788,11 @@ img {
   margin: 0 auto;
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid var(--paper-line);
-  border-top: 4px solid var(--cyan-ink);
+  border-top: 4px solid var(--red-mid);
   border-image: var(--gradient-brand) 1;
   border-radius: var(--radius-m);
   padding: 44px;
-  box-shadow: 0 30px 60px -30px rgba(11, 19, 43, 0.25);
+  box-shadow: 0 30px 60px -30px rgba(16, 22, 63, 0.25);
 }
 
 .sheet__grid {
@@ -819,11 +815,11 @@ img {
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: rgba(11, 19, 43, 0.72);
+  color: rgba(16, 22, 63, 0.72);
 }
 
 .field label .req {
-  color: var(--cyan-ink);
+  color: var(--red-mid);
 }
 
 .field input,
@@ -849,13 +845,13 @@ img {
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--cyan-ink);
-  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+  border-color: var(--red-mid);
+  box-shadow: 0 0 0 3px rgba(200, 31, 61, 0.15);
 }
 
 .field-error {
   font-size: 0.78rem;
-  color: var(--cyan-ink);
+  color: var(--red-mid);
   min-height: 1em;
 }
 
@@ -875,7 +871,7 @@ img {
 
 .sheet__note {
   font-size: 0.85rem;
-  color: rgba(11, 19, 43, 0.56);
+  color: rgba(16, 22, 63, 0.56);
   max-width: 34ch;
 }
 
@@ -898,7 +894,7 @@ img {
 .sheet__success-mark svg {
   width: 28px;
   height: 28px;
-  color: var(--ink);
+  color: #fff;
 }
 
 .sheet__success h3 {
@@ -908,7 +904,7 @@ img {
 
 .sheet__success p {
   margin-top: 10px;
-  color: rgba(11, 19, 43, 0.66);
+  color: rgba(16, 22, 63, 0.66);
   max-width: 40ch;
   margin-left: auto;
   margin-right: auto;
@@ -921,7 +917,7 @@ img {
 
 .register__contact-label {
   font-size: 1.2rem;
-  color: rgba(11, 19, 43, 0.56);
+  color: rgba(16, 22, 63, 0.56);
   margin-bottom: 14px;
 }
 
@@ -951,12 +947,12 @@ img {
 .register__contact-item svg {
   width: 16px;
   height: 16px;
-  color: var(--cyan-ink);
+  color: var(--red-mid);
   flex-shrink: 0;
 }
 
 .register__contact-item:hover {
-  border-bottom-color: var(--cyan-ink);
+  border-bottom-color: var(--red-mid);
 }
 
 /* ============================================================
