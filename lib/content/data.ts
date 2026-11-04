@@ -300,16 +300,10 @@ export const homeStory: HomeStory = {
     intro:
       "Every tournament we organize adds another chapter to the B2B Sports Club story.",
     paragraphs: [
-      "From the electrifying battles of WCC 4.0, where Turbo Titans claimed the championship, to the exciting journey of the Golden Leaf Cup and other competitive cricket events, our tournaments have brought teams together to compete, connect, and celebrate the spirit of cricket.",
+      "From the exciting journey of the Golden Leaf Cup and other competitive cricket events, our tournaments have brought teams together to compete, connect, and celebrate the spirit of cricket.",
       "Each edition has strengthened our community and raised the excitement for what comes next.",
     ],
     milestones: [
-      {
-        label: "WCC 4.0",
-        title: "Turbo Titans claimed the championship",
-        description: "Electrifying battles that crowned a champion.",
-        icon: "trophy",
-      },
       {
         label: "Golden Leaf Cup",
         title: "A journey of competitive cricket",

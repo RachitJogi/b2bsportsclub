@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroArt from "@/components/home/HeroArt";
 import Reveal from "@/components/home/Reveal";
 import Icon from "@/components/ui/Icon";
 import { getHomeStory } from "@/lib/content";
 import { pageMetadata } from "@/lib/site";
 import logo from "@/public/logo.png";
+import heroBanner from "@/public/turf-hero-banner.png";
 import "./home.css";
 
 export const revalidate = 3600;
@@ -26,7 +26,10 @@ export default async function HomePage() {
     <>
       {/* 1 — Hero */}
       <section className="hero-full" aria-labelledby="hero-title">
-        <HeroArt />
+        <div className="hero-art" aria-hidden="true">
+          <Image src={heroBanner} alt="" fill priority sizes="100vw" className="hero-art__photo" />
+          <div className="hero-art__vignette" />
+        </div>
         <div className="container hero-full__inner">
           <Image src={logo} alt="B2B Sports Club crest" className="hero-full__crest" priority />
           <span className="hero-full__brand">{hero.brand.toUpperCase()}</span>
