@@ -27,7 +27,7 @@
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--red-bright);
   outline-offset: 3px;
 }
 
@@ -38,7 +38,7 @@ button:focus-visible {
 }
 
 .text-link {
-  color: var(--cyan);
+  color: var(--red-bright);
   font-weight: 600;
   text-decoration: none;
 }
@@ -57,7 +57,7 @@ button:focus-visible {
   top: 0;
   z-index: 50;
   backdrop-filter: blur(10px);
-  background: rgba(11, 19, 43, 0.9);
+  background: rgba(10, 10, 10, 0.9);
 }
 
 .topbar__brand {
@@ -110,7 +110,7 @@ button:focus-visible {
 }
 
 .nav__link[aria-current="page"] {
-  box-shadow: inset 0 -2px 0 var(--cyan);
+  box-shadow: inset 0 -2px 0 var(--red-bright);
 }
 
 .nav__cta {
@@ -235,7 +235,7 @@ button:focus-visible {
 .card:hover,
 .card:focus-within {
   transform: translateY(-3px);
-  border-color: var(--cyan-mid);
+  border-color: var(--red-mid);
 }
 
 .card__top {
@@ -248,7 +248,7 @@ button:focus-visible {
 .card__top svg {
   width: 22px;
   height: 22px;
-  color: var(--cyan);
+  color: var(--red-bright);
 }
 
 .card__meta {
@@ -295,7 +295,7 @@ button:focus-visible {
 .card__facts svg {
   width: 16px;
   height: 16px;
-  color: var(--cyan);
+  color: var(--red-bright);
   flex-shrink: 0;
 }
 
@@ -305,7 +305,7 @@ button:focus-visible {
   align-items: center;
   gap: 6px;
   font-weight: 700;
-  color: var(--cyan);
+  color: var(--red-bright);
 }
 
 .card__cta svg {
@@ -333,7 +333,6 @@ button:focus-visible {
   justify-content: center;
   border-radius: var(--radius-m);
   background: var(--gradient-brand);
-  color: var(--ink);
 }
 
 .event__day {
@@ -375,7 +374,7 @@ button:focus-visible {
 .prose__quote {
   margin: 32px 0 0;
   padding-left: 20px;
-  border-left: 3px solid var(--cyan-mid);
+  border-left: 3px solid var(--red-mid);
   font-size: 1.25rem;
   font-weight: 600;
 }
@@ -402,7 +401,7 @@ button:focus-visible {
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 0.1em;
-  color: var(--cyan);
+  color: var(--red-bright);
 }
 
 .timeline__item h3 {
@@ -422,7 +421,7 @@ button:focus-visible {
 }
 
 .register__head .eyebrow {
-  color: var(--cyan-mid);
+  color: var(--red-mid);
 }
 
 /* ---------- footer (compact) ---------- */
@@ -492,7 +491,7 @@ button:focus-visible {
 
 .footer__nav a:hover {
   color: var(--ink);
-  background: var(--cyan);
+  background: var(--red-bright);
 }
 
 .footer__social {
@@ -511,8 +510,8 @@ button:focus-visible {
 }
 
 .footer__social a:hover {
-  border-color: var(--cyan-mid);
-  color: var(--cyan);
+  border-color: var(--red-mid);
+  color: var(--red-bright);
 }
 
 .footer__copy {
